@@ -1,0 +1,113 @@
+<style>
+    .listelementslider{
+        display: flex;
+        flex-wrap: nowrap;;
+    }
+
+    .listelementslider > div{
+        width: 120px;
+        height: 120px;
+        border: 2px solid rgba(0,0,0, 0.6);
+        /*display: flex;
+        align-items: center;*/
+        border-radius: 5px;
+        margin: 10px;
+        vertical-align: center;
+        padding: 2px;
+    }
+
+
+    .listelementslider > div.active{
+        border: 2px solid #a5cf4b;
+        filter: drop-shadow(0 0 0.75rem #a5cf4b);
+    }
+
+</style>
+<div class="modal-content">
+    <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"><input class="form-control nomslider" placeholder="Nom" {% if act != 'new' %}
+                        value="{{ slider.nom }}"
+                    {% endif %}>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <button class="savebtnslider"
+                            onclick="{% if act != 'new' %}
+                                        Changeslider({{ slider.id }});
+                                     {% else %}
+                                        Changeslider(0);
+                                     {% endif %}">Sauvegarder</button></div>
+                <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 d-flex justify-content-end"><button class="playbtnslider" onclick="lancesliderinfo()"></button></div>
+            </div>
+    </div>
+    <div class="listelementslider">
+        {% for elem in listfinal %}
+            <div class="d-table rapportelement {% if elem.selected %}active{% endif %}" id="{{ elem.id }}" onclick="select(this)">
+                <div class="d-table-cell align-middle text-center" onselectstart="return false">
+                    {{ elem.nom }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    $nomslider = $('.nomslider');
+
+    function select(elem) {
+        elem.classList.toggle("active");
+    }
+
+    function Changeslider(valeurid) {
+        listefinal = [];
+        $('.listelementslider').find('.active').each(function () {
+            listefinal.push($(this).attr('id'));
+        });
+        if(listefinal.length > 0){
+            $.ajax({
+                url: 'sliderinfo/'+valeurid,
+                type: 'post',
+                data: {
+                    'nom': $nomslider.val(),
+                    'listefinal[]' : listefinal,
+                    csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+                },
+                success: function (data) {
+                    slideractid = data;
+                },
+            });
+        }else{
+
+        }
+    }
+
+    function lancesliderinfo(){
+        listefinal = [];
+        $('.listelementslider').find('.active').each(function () {
+            listefinal.push($(this).attr('id'));
+        });
+        if(listefinal.length > 0){
+            $.ajax({
+                url: 'lanceslider',
+                type: 'post',
+                data: {
+                    'listefinal[]' : listefinal,
+                    csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+                },
+                success: function (data) {
+                    /*donnee = JSON.parse(data);
+                    donneelien = donnee['listelien'];
+                    donneeidhisto = donnee['id'];*/
+
+                    $modifierslider = $('#modifierslider');
+                    $modifierslider.modal('hide');
+                    playslider(data);
+
+                    //$content.load('slider');
+                },
+            });
+        }else{
+
+        }
+    }
+</script>

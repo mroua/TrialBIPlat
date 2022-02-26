@@ -1,0 +1,523 @@
+setInterval(function () {
+                switch (page) {
+                    case 'statistique':
+                        window.location.href = window.document.location.origin + "/cbi/page/statadmin";
+                        break;
+                    case 'messagerie':
+                        window.location.href = window.document.location.origin + "/cbi/page/messagerie";
+                        break;
+                    case 'authadmin':
+                        window.location.href = window.document.location.origin + "/cbi/page/authadmin";
+                        break;
+                    case 'accueil':
+
+                        window.location.href = window.document.location.origin + "/cbi/page/accueil";
+                        break;
+                    case 'historique':
+                        window.location.href = window.document.location.origin + "/cbi/page/historique";
+                        break;
+                    default:
+                }
+        }, 300000);//5mn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'conn/baseconn.html' %}
+
+{% block contenue %}
+    <style>
+        .action--open{
+            background: #cccccc !important;
+            border-radius: 50% !important;
+            width: 40px !important;
+            height: 40px !important;
+            position: absolute;
+        }
+    </style>
+
+	<div class="container">
+		<!-- Blueprint header -->
+		<header class="bp-header cf">
+			<div class="dummy-logo" style="overflow: hidden!important; white-space: nowrap; padding-top: 40px;">
+				<div class="dummy-icon foodicon foodicon--coconut"></div>
+				<!--<h2 class="dummy-heading" style=" padding-top: 10px; color: #f2f2f2">{ { user.get_username }}</h2>-->
+			</div>
+
+		</header>
+        <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
+
+
+		<nav id="ml-menu" class="menu">
+			<button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
+			<div class="menu__wrap" id="menu_div_parent">
+				<ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="All">
+                    <li class="menu__item" role="menuitem"><a class="menu__link" onclick="ChargementAcceuil()" href="#">Notification</a></li>
+					<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="Contenaire_dash" aria-owns="Contenaire_dash" href="#">Tableau de bord</a></li>
+                    {% if profile.slider or profile.admin %}
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="ChargementSlider()" href="#">Slider</a></li>
+                    {% endif %}
+                    {% if profile.droitauth and profile.admin == False %}
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="ChargementAuthUser()" href="#">Autorisation</a></li>
+                    {% endif %}
+					{% if profile.admin %}<li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="admin" aria-owns="admin" href="#" >Admin</a></li>
+                    {% else %}
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="ChargementMsgUser()" href="#">Messagerie</a></li>
+                    {% endif %}
+                    <li class="menu__item" role="menuitem"><a class="menu__link" onclick="Chargementapropos()" href="#">Apropos</a></li>
+                    <li class="menu__item" role="menuitem"><a class="menu__link" href="/deconnexion">Déconnexion</a></li>
+				</ul>
+				<!-- Submenu 1 -->
+				{% if profile.admin %}
+                    <ul data-menu="admin" id="admin" class="menu__level" tabindex="-1" role="menu" aria-label="Admin">
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="ChargementAdminPage()" href="#">Ajout objet</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="ChargementauthPage()" href="#">Autorisation</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="ChargementMessagePage()" href="#">Messagerie</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="ChargementStatistique()" href="#">Statistique</a></li>
+                        <li class="menu__item" role="menuitem"><a class="menu__link" onclick="ChargementHistorique()" href="#">Historique</a></li>
+                    </ul>
+                {% endif %}
+                <ul data-menu="Contenaire_dash" id="Contenaire_dash" class="menu__level" tabindex="-1" role="menu" aria-label="Dashboard">
+                </ul>
+            <!--  -->
+			</div>
+		</nav>
+		<div class="content" style="height: 100%;">
+			<!-- Ajax loaded content here -->
+		</div>
+	</div>
+
+
+    <div class="modal fade bd-example-modal-lg" id="messageriepopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Signaler un probleme</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="home" method="POST" id="form_problematique" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        <div class="row" style="display: none">
+                            <div class="col">{{ msg.lien }}</div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col">{{ msg.sujet }}</div>
+                        </div>
+                        <div class="row p-2 messagerieimageinput">
+                            <div class="col">{{ msg.image }}</div>
+                        </div>
+                        <div class="row p-2 messagerieprob">
+                            <div class="col">{{ msg.probleme }}</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center messageriebodypost"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
+                        <button id="ajtproblematique" class="classajtproblematique">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        pageurl = 'cbi/accueil';
+        lien = '{{ lien|safe }}';
+        idrapport = parseInt('{{ idrapport|safe }}');
+        page = '{{ page|safe }}';
+        auth = {{ auth|safe }};
+        page_origine = window.document.location.origin;
+        $content = $('.content');
+        $form_problematique = $('#form_problematique');
+        $ajtproblematique = $('#ajtproblematique');
+        $menu_div_parent = $('#menu_div_parent');
+        $id_lien = $('#id_lien');
+        idhisto = '';
+        $id_sujet = $("#id_sujet");
+        $id_probleme = $("#id_probleme");
+        $messageerreurmsg = $("#messageerreurmsg");
+        $messageriebosypost = $(".messageriebodypost");
+
+        $id_sujet.on('click', function () {
+            $messageriebosypost.html('');
+        });
+
+        $id_probleme.on('click', function () {
+            $messageriebosypost.html('');
+        });
+
+
+        if(lien !== ''){
+            starthistorique(idrapport);
+            $content.append("<iframe style='border:none; width: 100%; height: 98vh;' src='"+lien+"'><iframe>")
+        }else{
+            $content.load('/cbi/'+page);
+            starthistorique(page);
+            pageurl = page_origine+'/cbi/page/'+page;
+        }
+
+        $ajtproblematique.on('click', function (event) {
+            event.preventDefault();
+
+            $iframe = $content.find('iframe');
+            $id_lien.val(pageurl);
+            if($id_sujet.val().length > 0 && $id_probleme.val().length > 0){
+                $.ajax({
+                    data: $form_problematique.serialize(),
+                    type: $form_problematique.attr('method'),
+                    url: $form_problematique.attr('action'),
+                    success: function (response) {
+                        $fichier = $('#id_image');
+                        if($fichier[0].files.length > 0){
+                            var data = new FormData();
+                            data.append("file", $fichier[0].files[0]);
+                            data.append("id_messagerie", response);
+                            data.append("csrfmiddlewaretoken", $('input[name= csrfmiddlewaretoken]').val());
+                            $.ajax({
+                                url: 'ajoutimage',
+                                data: data,
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                type: 'post',
+                                success: function (data) {
+                                    if(data === 'Success'){
+                                        $messageriebosypost.html('');
+                                        $messageriebosypost.append('<div class="alert alert-danger alert-dismissible fade show" style="background:#a5cf4b; color:#f2f2f2" role="alert">\n' +
+                                        '  <strong>Succée!</strong> Votre message a été envoyer; Nous vous contacterons le plus vite possible\n' +
+                                        '</div>');
+                                        /*$messageriebosypost.append('<div class="card" style="background: #; color: #f2f2f2">\n' +
+                                            '                        <div class="row">\n' +
+                                            '                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">\n' +
+                                            '                                .\n' +
+                                            '                            </div>\n' +
+                                            '                        </div>\n' +
+                                            '                    </div>')*/
+                                    }
+
+                                },
+                            });
+                        }
+                        else {
+                            if(response !== 'Error') {
+                                $messageriebosypost.html('');
+                                $messageriebosypost.append('<div class="alert alert-danger alert-dismissible fade show" style="background:#a5cf4b; color:#f2f2f2" role="alert">\n' +
+                                    '  <strong>Succée!</strong> Votre message a été envoyer; Nous vous contacterons le plus vite possible\n' +
+                                    '</div>');
+                                /*$messageriebosypost.append('<div class="card" style="background: #; color: #f2f2f2">\n' +
+                                    '                        <div class="row">\n' +
+                                    '                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">\n' +
+                                    '                                .\n' +
+                                    '                            </div>\n' +
+                                    '                        </div>\n' +
+                                    '                    </div>'
+                                )*/
+                            }
+                        }
+                    }
+                });
+            }else{
+                $messageriebosypost.html('');
+                $messageriebosypost.append('<div class="alert alert-danger alert-dismissible fade show" style="background:#c24157; color:#f2f2f2" role="alert">\n' +
+                    '  <strong>Erreure!</strong> Vous devez replir les champs sujet et problématique.\n' +
+                    '</div>')
+            }
+        });
+
+        getchild(auth);
+        function getchild(listeparent){
+            for(i=0; i<listeparent.length; i++){
+                type = listeparent[i]['type'];
+                parent = listeparent[i]['parent_id'];
+                nom = listeparent[i]['nom'];
+                idelem = listeparent[i]['id'];
+                lien = "'"+listeparent[i]['lien']+"'";
+
+                if(type === '2'){
+                    if($('#Contenaire_'+parent).length === 0) {
+                        $('#Contenaire_dash').append('<li class="menu__item" role="menuitem"><a class="menu__link" ' +
+                            'data-submenu="Contenaire_P" aria-owns="Contenaire_P"' +
+                            ' href="#" >Poles</a></li>')
+                    }
+                }
+                if(type === '3'){
+                    if($('#Contenaire_'+parent).length === 0) {
+                        $('#Contenaire_dash').append('<li class="menu__item" role="menuitem"><a class="menu__link" ' +
+                            'data-submenu="Contenaire_S" aria-owns="Contenaire_S"' +
+                            ' href="#" >Sociétés</a></li>')
+                    }
+                }
+
+                if($('#Contenaire_'+parent).length === 0) {
+                        $menu_div_parent.append('<ul data-menu="Contenaire_'+parent+'" id="Contenaire_'+parent+'" class="menu__level"' +
+                            ' tabindex="-1" role="menu" aria-label="'+nom+'"></ul>');
+                    }
+                if(type !=='6'){
+                    $('#Contenaire_'+parent).append('<li class="menu__item" role="menuitem"><a class="menu__link" ' +
+                        'data-submenu="Contenaire_'+idelem+'" aria-owns="Contenaire_'+idelem+'"' +
+                        ' href="#" >'+nom+'</a></li>')
+                }else{
+                    $('#Contenaire_'+parent).append('<li class="menu__item" role="menuitem">' +
+                        '<a onclick="ChargementRapport('+lien+', '+parseInt(idelem)+')" class="menu__link" href="#">'+nom+'</a></li>')
+
+                }
+            }
+        }
+
+        function ChargementRapport(lien, identifiant) {
+            if(idrapport !== identifiant){
+                idrapport = identifiant;
+                starthistorique(identifiant);
+                $loadingpage.css('display', 'block');
+                pageurl = page_origine+'/cbi/rapport/'+identifiant;
+                $content.html('');
+                $content.append("<iframe style='border:none; width: 100%; height: 98vh;' src='"+lien+"'><iframe>");
+                setTimeout(function() {
+                    $loadingpage.css('display', 'none');
+                }, 1000);
+            }
+        }
+
+        function ChargementHistorique() {
+            if(page !== 'historique'){
+                page = 'historique';
+                starthistorique(page);
+                $loadingpage.css('display', 'block');
+                setTimeout(function() {
+                    $content.load('historique');
+                    $loadingpage.css('display', 'none');
+                    pageurl = page_origine+'/cbi/page/historique';
+                }, 700);
+            }
+        }
+        function ChargementSlider() {
+            if(page !== 'slider'){
+                page = 'slider';
+                starthistorique(page);
+                $loadingpage.css('display', 'block');
+                setTimeout(function() {
+                    $content.load('slider');
+                    $loadingpage.css('display', 'none');
+                    pageurl = page_origine+'/cbi/page/slider';
+                }, 700);
+            }
+        }
+
+        function ChargementAcceuil() {
+            if(page !== 'accueil'){
+                page = 'accueil';
+                starthistorique(page);
+                $loadingpage.css('display', 'block');
+                setTimeout(function() {
+                    $loadingpage.css('display', 'none');
+                    $content.load('accueil');
+                    pageurl = page_origine+'/cbi/page/accueil';
+                }, 700);
+            }
+        }
+
+        function ChargementAdminPage() {
+            if(page !== 'adminpage'){
+                page = 'adminpage';
+                starthistorique(page);
+                $loadingpage.css('display', 'block');
+                setTimeout(function() {
+                    $content.load('adminpage');
+                    $loadingpage.css('display', 'none');
+                    pageurl = page_origine+'/cbi/page/adminpage';
+
+                }, 700);
+            }
+        }
+
+        function Chargementapropos() {
+            if(page !== 'apropos'){
+                page = 'apropos';
+                starthistorique(page);
+                $loadingpage.css('display', 'block');
+                setTimeout(function() {
+                    $loadingpage.css('display', 'none');
+                    $content.load('apropos');
+                    pageurl = page_origine+'/cbi/page/apropos';
+                }, 700);
+            }
+        }
+
+        function ChargementauthPage() {
+            if(page !== 'authadmin'){
+                page = 'authadmin';
+                starthistorique(page);
+                $loadingpage.css('display', 'block');
+                setTimeout(function() {
+                    $content.load('authadmin');
+                    $loadingpage.css('display', 'none');
+                    pageurl = page_origine+'/cbi/page/authadmin';
+                }, 700);
+            }
+        }
+
+        function ChargementAuthUser() {
+            if(page !== 'authadmin'){
+                page = 'authadmin';
+                starthistorique(page);
+                $loadingpage.css('display', 'block');
+                setTimeout(function() {
+                    $content.load('authadmin');
+                    $loadingpage.css('display', 'none');
+                    pageurl = page_origine+'/cbi/page/authadmin';
+                }, 700);
+            }
+        }
+
+        function ChargementMessagePage() {
+            if(page !== 'messagerie'){
+                page = 'messagerie';
+                starthistorique(page);
+                $loadingpage.css('display', 'block');
+                setTimeout(function() {
+                    $loadingpage.css('display', 'none');
+                    $content.load('messagerie');
+                    pageurl = page_origine+'/cbi/page/messagerie';
+                }, 700);
+            }
+        }
+
+
+        function ChargementMsgUser(){
+            if(page !== 'messagerie'){
+                page = 'messagerie';
+                starthistorique(page);
+                $loadingpage.css('display', 'block');
+                setTimeout(function() {
+                    $loadingpage.css('display', 'none');
+                    $content.load('messagerie');
+                    pageurl = page_origine+'/cbi/page/messagerie';
+                }, 700);
+            }
+        }
+
+        function ChargementStatistique() {
+            if(page !== 'statistique'){
+                page = 'statistique';
+                starthistorique(page);
+                $loadingpage.css('display', 'block');
+                setTimeout(function() {
+                    $content.load('statadmin');
+                    $loadingpage.css('display', 'none');
+                    pageurl = page_origine+'/cbi/page/statadmin';
+
+                }, 700);
+            }
+        }
+
+        function starthistorique(action){
+            $.ajax({
+                type:'POST',
+                url: 'userhistory',
+                data:
+                    {
+                        'idhisto': idhisto,
+                        'action': action,
+                        csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+                    },
+                success: function(resultat){
+                    idhisto = resultat;
+                    console.log('idhisto: '+ idhisto)
+                }
+            });
+        }
+
+
+
+        /*window.addEventListener('beforeunload', function (e) {
+            $.ajax({
+                type:'POST',
+                url: "https://cbiapi.groupe-hasnaoui.com/fermeture/?idhisto="+idhisto,
+                async : true,
+            });
+        });
+*/
+        jQuery(window).bind('beforeunload', function(e) {
+            $.ajax({
+                type:'POST',
+                url: "https://cbiapi.groupe-hasnaoui.com/fermeture/?idhisto="+idhisto,
+                async : true,
+            });
+        });
+
+        /*window.onbeforeunload = function(){
+             $.ajax({
+                type:'POST',
+                url: "https://cbiapi.groupe-hasnaoui.com/fermeture/?idhisto="+idhisto,
+                async : true,
+            });
+        };
+
+        window.onbeforeunload = function(){
+          $.ajax({
+                type:'POST',
+                url: "https://cbiapi.groupe-hasnaoui.com/fermeture/?idhisto="+idhisto,
+                async : true,
+          });
+        };
+
+        window.onunload = function() {
+            $.ajax({
+                type:'POST',
+                url: "https://cbiapi.groupe-hasnaoui.com/fermeture/?idhisto="+idhisto,
+                async : true,
+          });
+        };*/
+
+
+    </script>
+	<script>
+        (function() {
+            var menuEl = document.getElementById('ml-menu'),
+                mlmenu = new MLMenu(menuEl, {
+                    // breadcrumbsCtrl : true, // show breadcrumbs
+                    // initialBreadcrumb : 'all', // initial breadcrumb text
+                    backCtrl : false, // show back button
+                    // itemsDelayInterval : 60, // delay between each menu item sliding animation
+                    //onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+                });
+
+            // mobile menu toggle
+            var openMenuCtrl = document.querySelector('.action--open'),
+                closeMenuCtrl = document.querySelector('.action--close');
+
+            openMenuCtrl.addEventListener('click', openMenu);
+            closeMenuCtrl.addEventListener('click', closeMenu);
+
+            function openMenu() {
+                classie.add(menuEl, 'menu--open');
+                closeMenuCtrl.focus();
+            }
+
+            function closeMenu() {
+                classie.remove(menuEl, 'menu--open');
+                openMenuCtrl.focus();
+            }
+        })();
+	</script>
+{% endblock %}

@@ -1,0 +1,216 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CBI</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+
+<style>
+    .loadingpage{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0,0.8);
+        backdrop-filter: blur(3px);
+        z-index: 1000000;
+        display: none;
+    }
+
+    .imgloadingwhite{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -25px 0 0 -25px;
+    }
+
+</style>
+
+<div class="loadingpage">
+    <img class="imgloadingwhite" src="{% static 'site/img/loadingwhite.svg' %}">
+</div>
+<div class="modal fade bd-example-modal-lg" id="messageriepopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Signaler un probleme</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/messagerieprob" method="POST" id="form_problematique" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        <div class="row p-2" style="display: none">
+                            <div class="col">{{ msg.designation }}</div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col">{{ msg.sujet }}</div>
+                        </div>
+                        <div class="row p-2 messagerieprob">
+                            <div class="col">{{ msg.probleme }}</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center messageriebodypost"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
+                        <button id="ajtproblematique" class="classajtproblematique">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<body style="background-color: #666666;">
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+                    {% csrf_token %}
+					<span class="login100-form-title p-b-60">
+						Accéder à votre session.
+					</span>
+                    <br>
+                    <div class="MessageErreur"></div>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate = "Vous devez remplir cette entrée">
+						<input class="input100" type="text" name="email" id="inputemad">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Email/ad2000</span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate="Vous devez remplir cette entrée">
+						<input class="input100" type="password" name="pass">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Mot de passe</span>
+					</div>
+
+					<div class="flex-sb-m w-full p-t-3 p-b-32" style="color: #c8c8c8;display: flex; align-items: center; justify-content: center; cursor: pointer">
+						<h8 data-toggle="modal" data-target="#messageriepopup" style="text-decoration: underline;">Signaler un problème ?</h8>
+
+					</div>
+			
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							connexion
+						</button>
+					</div>
+
+					<div class="text-center cbilogoimage">
+						<img src="{% static 'login/newint/Logo CBI Login.svg' %}" style="width: 200px">
+					</div>
+
+				</form>
+
+				<!--<div class="login100-more" style="background-image: url({ % static 'login/assets/images/BackGround.jpg'%});">-->
+				<div class="login100-more" style="background-image: url({% static 'login/newint/Login.svg'%});
+                        background-size: 1697px 900px;" >
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+	
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'login/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/js/main.js' %}"></script>
+
+    <script>
+        $ajtproblematique= $('#ajtproblematique');
+        $id_sujet = $("#id_sujet");
+        $id_probleme = $("#id_probleme");
+        $messageerreurmsg = $("#messageerreurmsg");
+        $messageriebosypost = $(".messageriebodypost");
+        $id_designation = $('#id_designation');
+        $inputemad = $('#inputemad');
+        $form_problematique = $('#form_problematique');
+        console.log($form_problematique.attr('action'));
+
+        function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
+
+        $ajtproblematique.on('click', function (event) {
+            event.preventDefault();
+            $id_designation.val($inputemad.val());
+            if($id_sujet.val().length > 0 && $id_probleme.val().length > 0){
+                $.ajax({
+                    data: $form_problematique.serialize(),
+                    type: $form_problematique.attr('method'),
+                    url: $form_problematique.attr('action'),
+                    success: function (response) {
+                        if(response !== 'Error') {
+                            $messageriebosypost.html('');
+                            $messageriebosypost.append('<div class="alert alert-danger alert-dismissible fade show" style="background:#a5cf4b; color:#f2f2f2" role="alert">\n' +
+                                '  <strong>Succée!</strong> Votre message a été envoyer; Nous vous contacterons le plus vite possible\n' +
+                                '</div>');
+
+                        }else{
+                            $messageriebosypost.html('');
+                            $messageriebosypost.append('<div class="alert alert-danger alert-dismissible fade show" style="background:#c24157; color:#f2f2f2" role="alert">\n' +
+                                '  <strong>Erreure!</strong> un probléme est survenue, Merci de nous recontacter plus tard.\n' +
+                                '</div>')
+                        }
+                    }
+                });
+            }else{
+                $messageriebosypost.html('');
+                $messageriebosypost.append('<div class="alert alert-danger alert-dismissible fade show" style="background:#c24157; color:#f2f2f2" role="alert">\n' +
+                    '  <strong>Erreure!</strong> Vous devez replir les champs sujet et problématique.\n' +
+                    '</div>')
+            }
+        });
+
+        $loadingpage = $('.loadingpage');
+        lienpage = '{{ lienpage|safe }}';
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="56" height="56" viewBox="0 0 56 56">
+  <defs>
+    <filter id="Ellipse_31" x="0" y="0" width="56" height="56" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Groupe_4534" data-name="Groupe 4534" transform="translate(-302 -245)">
+    <g transform="matrix(1, 0, 0, 1, 302, 245)" filter="url(#Ellipse_31)">
+      <circle id="Ellipse_31-2" data-name="Ellipse 31" cx="19" cy="19" r="19" transform="translate(9 6)" fill="#ffc34a"/>
+    </g>
+    <g id="Groupe_4416" data-name="Groupe 4416" transform="translate(0 75)">
+      <path id="Polygone_9" data-name="Polygone 9" d="M6.136,1.481a1,1,0,0,1,1.728,0L13.123,10.5a1,1,0,0,1-.864,1.5H1.741a1,1,0,0,1-.864-1.5Z" transform="translate(323 194)" fill="#fff"/>
+      <path id="Polygone_10" data-name="Polygone 10" d="M6.136,1.481a1,1,0,0,1,1.728,0L13.123,10.5a1,1,0,0,1-.864,1.5H1.741a1,1,0,0,1-.864-1.5Z" transform="translate(337 197) rotate(180)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

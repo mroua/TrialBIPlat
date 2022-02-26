@@ -1,0 +1,411 @@
+<style>
+    .container-datainf .fieldlabels {
+        color: #1c1d22 !important;
+        text-align: left
+    }
+
+    .container-datainf #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: #fff;
+        padding-left: 0;
+        margin-top: 30px
+    }
+
+    .container-datainf #progressbar li {
+        list-style-type: none;
+        font-size: 13px;
+        width: 25%;
+        float: left;
+        position: relative;
+        font-weight: 400
+    }
+
+    .container-datainf #progressbar #step1:before {
+        content: "1";
+        color: #fff
+    }
+
+    .container-datainf #progressbar #step2:before {
+        content: "2";
+        color: #fff
+    }
+
+    .container-datainf #progressbar #step3:before {
+        content: "3";
+        color: #fff
+    }
+
+    .container-datainf #progressbar #step4:before {
+        content: "4";
+        color: #fff
+    }
+
+    .container-datainf #progressbar li:before {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        display: block;
+        font-size: 20px;
+        background: #455A64;
+        border-radius: 50%;
+        margin: auto;
+        padding: 0px
+    }
+
+    .container-datainf #progressbar li:after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: #455A64;
+        position: absolute;
+        left: 0;
+        top: 21px;
+        z-index: -1
+    }
+
+    .container-datainf #progressbar li:last-child:after {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: absolute;
+    left: -50%
+}
+
+    .container-datainf #progressbar li:nth-child(2):after {
+        left: -50%
+    }
+
+    .container-datainf #progressbar li:nth-child(2):after {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        position: absolute;
+        left: 50%
+    }
+
+    .container-datainf #progressbar li:nth-child(3):after {
+        left: -50%
+    }
+
+    .container-datainf #progressbar li:nth-child(3):after {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        position: absolute;
+        left: 50%
+    }
+
+    .container-datainf #progressbar li:last-child:after {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px
+    }
+
+    .container-datainf #progressbar li:nth-child(2):after {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px
+    }
+
+    .container-datainf #progressbar li.active:before,
+    .container-datainf #progressbar li.active:after {
+        background: #a5cf4b
+    }
+
+    .container-datainf #progressbar li.actuelle:before,
+    .container-datainf li.actuelle:after {
+        background: #0099d5;
+    }
+
+    .container-datainf .card {
+        background-color: #f5f5f5;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        padding: 60px 40px 40px 40px;
+        z-index: 0;
+        display: none
+    }
+
+    .container-datainf .card.show {
+        display: block
+    }
+
+    .container-datainf .form-control-label {
+        font-size: 22px !important;
+        color: #fff;
+        letter-spacing: 1px
+    }
+
+    .container-datainf ::placeholder {
+        color: #fff;
+        opacity: 1;
+        font-weight: 300
+    }
+
+    .container-datainf :-ms-input-placeholder {
+        color: #fff;
+        font-weight: 300
+    }
+
+    .container-datainf ::-ms-input-placeholder {
+        color: #fff;
+        font-weight: 300
+    }
+
+    .container-datainf input,
+    .container-datainf textarea {
+        padding: 8px 15px 8px 15px;
+        border-radius: 0px !important;
+        margin-bottom: 25px;
+        margin-top: 2px;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        font-size: 18px !important;
+        font-weight: 300
+    }
+
+    .container-datainf input:focus,
+    .container-datainf textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border-bottom: 1px solid #9FA8DA;
+        outline-width: 0;
+        font-weight: 400
+    }
+
+
+
+    .container-datainf .circle {
+        position: relative
+    }
+
+    .container-datainf .fa-long-arrow-right {
+        color: #a5cf4b;
+        background-color: #fff;
+        padding: 12px;
+        margin: 5px;
+        border-radius: 50%;
+        border: 3px solid #a5cf4b;
+        position: absolute;
+        left: -28px;
+        top: 12px;
+        cursor: pointer
+    }
+
+    .container-datainf .fa-long-arrow-right:hover {
+        background-color: #f1f1f1
+    }
+
+    .container-datainf .fa-long-arrow-left {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        color: #fff;
+        cursor: pointer
+    }
+
+    .container-datainf .check-mark {
+        width: 180px;
+        height: 180px
+    }
+
+    .container-datainf .form-control-label{
+        color: #1c1d22 !important;
+        font-weight: 600;
+    }
+
+    .container-datainf .step0{
+        text-align: center;
+    }
+
+    .container-datainf .row{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .container-datainf .btnvalidateadd{
+        background: #a5cf4b;
+        color: white;
+        font-weight: bold;
+    }
+
+    .container-datainf .btnvalidateanul{
+        background: #c24157;
+        color: white;
+        font-weight: bold;
+    }
+
+    .container-datainf .champproblematique{
+        overflow-y: scroll;
+    }
+
+    .container-datainf .champproblematique {
+        scrollbar-width: none;
+    }
+
+    .container-datainf .champproblematique::-webkit-scrollbar {
+        display: none;
+    }
+
+    .container-datainf a{
+        color: #0099d5;
+    }
+
+    .container-datainf a:hover{
+        color: #a5cf4b;
+    }
+
+</style>
+
+<div class="container-datainf container-fluid">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <ul id="progressbar">
+                {% for elem in historiquemessagerie  %}
+                    {% if forloop.last  %}
+                        {% if elem.type == '1' %}
+                            <script>console.log(1)</script>
+                            <li class="active step0" id="step1">Recue</li>
+                            <li class="step0" id="step2">En-cours</li>
+                            <li class="step0" id="step3">Validation</li>
+                            <li class="step0" id="step4">Confirmation</li>
+                        {% elif elem.type == '2' %}
+                            <script>console.log(2)</script>
+                            <li class="active step0" id="step1">Recue</li>
+                            <li class="active step0" id="step2">En-cours</li>
+                            <li class="step0" id="step3">Validation</li>
+                            <li class="step0" id="step4">Confirmation</li>
+                        {% elif elem.type == '3' %}
+                            <script>console.log(3)</script>
+                            <li class="active step0" id="step1">Recue</li>
+                            <li class="active step0" id="step2">En-cours</li>
+                            <li class="active step0" id="step3">Validation</li>
+                            <li class="step0" id="step4">Confirmation</li>
+                        {% elif elem.type == '4' %}
+                            <script>console.log(4)</script>
+                            <li class="active step0" id="step1">Recue</li>
+                            <li class="active step0" id="step2">En-cours</li>
+                            <li class="active step0" id="step3">Validation</li>
+                            <li class="active step0" id="step4">Confirmation</li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+                <div style="background: #f2f2f2; border-radius: 5px; padding: 0 10px 10px 10px">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                {% if profile != None %}
+                    <div class="row d-flex justify-content-center" style="padding: 10px">
+                        <div class="col-md-3 col-lg-3 col-sm-8 col-8">
+                            <img id="photo_user" src="data:image/jpeg;base64,{{ profile.photo }}" style="display: block; width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(0,0,0,.125)">
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-lg-12 col-lg-12 col-md-12 col-sm-12 text-center">
+                            <h7 style="font-weight: bold">{{ profile.utilisateur.first_name }}</h7>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
+                            <h9>{{ profile.poste }}</h9>
+                        </div>
+                    </div>
+                    {% if profile.societe != None %}
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
+                                <h9>{{ profile.societe }}</h9>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if messagerie.image == "" %}
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-11 form-control">
+                            <label><b>Sujet:</b> {{ messagerie.sujet }}</label>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-11 form-control">
+                            <label><b>Sujet:</b> {{ messagerie.sujet }}</label>
+                        </div>
+                        <div class="col-md-1 col-lg-1 col-md-1 col-sm-1 form-control d-none d-sm-inline" style="background: #0099d5; margin-left: 5px; margin-right: 5px">
+                            <a href="/media/{{ messagerie.image }}" target="_blank"><div class="screenshotmessagerie"></div></a>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="row champproblematique d-flex justify-content-center" style="max-height: 400px;">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-11 form-control">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
+                                <h9 style="font-weight: bold">{{ messagerie.date|date:'d/m/Y' }}</h9>
+                            </div>
+                        </div>
+                        <h9 style="font-weight: bold">Problématique:</h9>
+                        <p>{{ messagerie.probleme }}</p>
+                    </div>
+                </div>
+                {% if profile != None %}
+                    <div class="row champproblematique d-flex justify-content-center" style="max-height: 200px;">
+                        <div class="col-lg-11 col-md-11 col-sm-11  col-11 form-control">
+                            <label><b>Lien : </b><a href="{{ messagerie.lien }}" target="_blank">{{ messagerie.lien }}</a></label>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11">
+                        <!-- profilecon -->
+                        {% for elem in historiquemessagerie  %}
+                            {% if forloop.last  %}
+                                {% if elem.type == '1' and profilecon.admin %}
+                                    {% if profile != None %}
+                                        <div class="row d-flex justify-content-center">
+                                            <button id="validationetapeprob" onclick="changermessage('2','{{ messagerie.id }}')">Commencer</button>
+                                        </div>
+                                    {% else %}
+                                        <div class="row d-flex justify-content-center">
+                                            <button id="validationetapeprob" onclick="changermessage('4','{{ messagerie.id }}')">Confirmer</button>
+                                        </div>
+                                    {% endif %}
+                                {% elif elem.type == '2' and profilecon.admin  %}
+                                    <div class="row d-flex justify-content-center">
+                                        <button id="validationetapeprob" onclick="changermessage('3','{{ messagerie.id }}')">Valider</button>
+                                    </div>
+                                {% elif elem.type == '3' and profilecon.admin  == False %}
+                                    <div class="row d-flex justify-content-center">
+                                        <button id="relanceretapeprob" onclick="changermessage('1','{{ messagerie.id }}')">Relancer</button>
+                                        <button id="validationetapeprob" onclick="changermessage('4','{{ messagerie.id }}')">Confirmer</button>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $imagebackground = $('.imagebackground');
+    function changermessage(choix, ident) {
+        $.ajax({
+            type:'POST',
+            url: "information/"+ident,
+            data:
+                {
+                    'choix': choix,
+                    csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+                },
+            success: function(resultat){
+
+            }
+        });
+        $messagecontpopup = $('#messagecontpopup');
+        $messagecontpopup.modal('hide');
+        $content.load('messagerie');
+    }
+
+</script>

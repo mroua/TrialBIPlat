@@ -1,0 +1,3 @@
+{% for enf in enfants %}
+    <option value="{{ enf.id }}">{{ enf.nom }}({{ enf.parent }})</option>
+{% endfor %}

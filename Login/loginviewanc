@@ -1,0 +1,223 @@
+import json
+
+from django.contrib.auth import authenticate, login as dj_login, logout
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, redirect
+from cryptography.fernet import Fernet
+import requests
+
+import base64
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from django.urls import reverse
+
+from Login.verifieraut import verifierauthaut
+from bi.models import Autorisation
+from .models import PROFILE, OBJETSITE, HISTORIQUELOGIN
+
+
+lien = ''
+def encodepassad(word):
+    password_provided = "wordtodecrypt"
+    password = password_provided.encode()
+    salt = b'salt_'
+    kdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=salt,
+        iterations=100000,
+        backend=default_backend()
+    )
+    key = base64.urlsafe_b64encode(kdf.derive(password))
+
+    message = word.encode()
+
+    f = Fernet(key)
+    encrypted = f.encrypt(message)
+    return encrypted
+
+def societeabr(abr):
+    try:
+        if abr == "GSHA":
+            societe = OBJETSITE.objects.get(nom= "GSH", type=3)
+        elif abr == "SODE":
+            societe = OBJETSITE.objects.get(nom="SODEA", type=3)
+        elif abr == "BTPH":
+            societe = OBJETSITE.objects.get(nom="BTPH", type=3)
+        elif abr == "HFCM":
+            societe = OBJETSITE.objects.get(nom="HFCM", type=3)
+        elif abr == "STON":
+            societe = OBJETSITE.objects.get(nom="ALPOSTONE", type=3)
+        elif abr == "GRAN":
+            societe = OBJETSITE.objects.get(nom="GRANITTAM", type=3)
+        elif abr == "SECH":
+            societe = OBJETSITE.objects.get(nom="SECH", type=3)
+        elif abr == "TAMS":
+            societe = OBJETSITE.objects.get(nom="TAMSTONES", type=3)
+        elif abr == "ALUX":
+            societe = OBJETSITE.objects.get(nom="ALUMIX", type=3)
+        elif abr == "HGPS":
+            societe = OBJETSITE.objects.get(nom="HGP", type=3)
+        elif abr == "HTFS":
+            societe = OBJETSITE.objects.get(nom="HTF", type=3)
+        elif abr == "HMDM":
+            societe = OBJETSITE.objects.get(nom="MDM", type=3)
+        elif abr == "PUMA":
+            societe = OBJETSITE.objects.get(nom="PUMA", type=3)
+        elif abr == "STRU":
+            societe = OBJETSITE.objects.get(nom="STRUGAL", type=3)
+        elif abr == "TEKN":
+            societe = OBJETSITE.objects.get(nom="TEKNA", type=3)
+        elif abr == "CLIN":
+            societe = OBJETSITE.objects.get(nom="CLINIQUE HASNAOUI", type=3)
+        elif abr == "GAMS":
+            societe = OBJETSITE.objects.get(nom="GAMMA", type=3)
+        elif abr == "GRYD":
+            societe = OBJETSITE.objects.get(nom="GIRYAD", type=3)
+        elif abr == "HFND":
+            societe = OBJETSITE.objects.get(nom="HASNAOUI FONDATION", type=3)
+        elif abr == "HSPI":
+            societe = OBJETSITE.objects.get(nom="HASNAOUI SPI", type=3)
+        elif abr == "HLOG":
+            societe = OBJETSITE.objects.get(nom="HL", type=3)
+        elif abr == "HTAS":
+            societe = OBJETSITE.objects.get(nom="HTA", type=3)
+        elif abr == "PHAR":
+            societe = OBJETSITE.objects.get(nom="LE PHARE", type=3)
+        else:
+            return None
+        return societe
+    except Exception:
+        return None
+
+def loggin(request):
+    if (request.user.id is None):
+        if request.method == 'POST':
+            identifiant = request.POST['identifiant']
+            password = request.POST['password']
+
+            if(identifiant == 'trial' and password == 'trial'):
+                return None
+            else:
+                password = encodepassad(password)
+                djangopassword = "Il vaut mieux se disputer avec quelqu'un d'intelligent que parler à un imbécile23/12/2019."
+
+                requette = json.loads(requests.post("http://10.10.10.64:8180/newlog/?identifiant="+identifiant+"&password="+str(password)).text)
+
+
+                if(requette == "erreur"):
+                    #historique = HISTORIQUELOGIN.objects.create(utilisateurinc=identifiant, connexionreussite=False, connetee=False)
+                    #historique.save()
+                    return HttpResponse(requette)
+                else:
+                    try:
+                        util = User.objects.get(username=requette['pseudo'])
+                        profile = PROFILE.objects.get(utilisateur__username=util.username)
+
+                        try:
+                            info_util = json.loads(requests.post("http://10.10.10.64:8484/cbi/webapi/annuaire/getEmailByIdAd2000?id=" + util.username).text)
+                            manager_ad = info_util['managerAD']
+                        except Exception:
+                            manager_ad = ''
+                        if profile.superieur == None:
+                            util_sup = ''
+                        else:
+                            util_sup = profile.superieur.username
+
+                        if(util_sup != manager_ad):
+                            try:
+                                profile.superieur = User.objects.get(username=manager_ad)
+                                profile.save()
+                            except ObjectDoesNotExist:
+                                profile.superieur = None
+                                profile.save()
+
+                        if profile.societe == None:
+                            util_soc = ''
+                        else:
+                            util_soc = profile.societe.nom
+                        if(util_soc != requette['societe']):
+                            try:
+                                profile.societe = OBJETSITE.objects.get(nom=requette['societe'])
+                                profile.save()
+                            except ObjectDoesNotExist:
+                                profile.societe = None
+                                profile.save()
+                        if(profile.poste != requette['title'].replace('\\xe9', 'é')):
+                            profile.poste = requette['title'].replace('\\xe9', 'é')
+                            profile.save()
+                    except ObjectDoesNotExist:
+                        nomcomplet = requette['nom'].split('(')[0]
+
+                        util = User.objects.create_user(username=requette['pseudo'], email=requette['email'], password = djangopassword, first_name = nomcomplet)
+                        util.save()
+
+                        try:
+                            info_util = json.loads(requests.post("http://10.10.10.64:8484/cbi/webapi/annuaire/getEmailByIdAd2000?id=" + request['pseudo']).text)
+                            manager_ad = info_util['managerAD']
+                        except Exception:
+                            manager_ad = ''
+
+
+
+                        try:
+                            superieur = User.objects.get(username=manager_ad)
+                        except ObjectDoesNotExist:
+                            superieur = None
+
+                        try:
+                            societe = OBJETSITE.objects.get(nom=requette['societe'])
+                        except ObjectDoesNotExist:
+                            societe = None
+
+                        liste_droits = verifierauthaut(util.username)
+
+
+                        profile = PROFILE.objects.create(utilisateur=util, superieur=superieur, societe=societe, poste = requette['title'].replace('\\xe9', 'é'))
+
+                        if(len(liste_droits) == 0 or liste_droits[0] != "Consolidé"):
+                            liste = OBJETSITE.objects.filter(id__in=liste_droits)
+                            profile.type_autorisation = 'AU'
+                            profile.id_objet.set(liste)
+                            for elem in liste:
+                                auth = Autorisation.objects.create(user= util, useradd='biuser', objetsite=elem)
+                                auth.save()
+                        else:
+                            liste = OBJETSITE.objects.all()
+                            profile.type_autorisation = 'TC'
+                            profile.id_objet.set(liste)
+                            for elem in liste:
+                                auth = Autorisation.objects.create(user= util, useradd='biuser', objetsite=elem)
+                                auth.save()
+                        profile.save()
+
+                    utilisateur = authenticate(username=requette['pseudo'], password=djangopassword)
+                    dj_login(request, utilisateur)
+
+                    #historique = HISTORIQUELOGIN.objects.create(utilisateur=utilisateur)
+                    #historique.save()
+
+                    return HttpResponse('success')
+        else:
+            liste_object = PROFILE.objects.all()
+
+            return render(request, 'LoginPage.html', {'liste_object':liste_object, 'lienredirect': lien})
+    else:
+        return HttpResponseRedirect('/cbi')
+
+
+def homerap(request, pk):
+        global lien
+        lien = pk
+        return redirect('connexion')
+
+def deconnexion(request):
+    if (request.user.id is None):
+        return HttpResponseRedirect('/cbi')
+    else:
+        if request.method == 'GET':
+            logout(request)
+        return render(request, 'LoginPage.html')

@@ -1,0 +1,74 @@
+{% load static %}
+<style>
+    @media screen and (max-width: 40em) {
+        .titrepage {
+            position: absolute;
+            top: -6vh;
+            left: 20vw;
+        }
+    }
+
+    .contpageacceuil a{
+        color: #a5cf4b;
+    }
+
+    .contpageacceuil a:hover{
+        color: #0099d5;
+    }
+
+
+</style>
+<div class="contpageacceuil">
+    <div class="row" style="margin-top: 2%;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h4 class="titrepage">Accueil </h4>
+        </div>
+    </div>
+    <div class="listnotif" style="padding-left: 17%; padding-right: 17%;">
+        {% if listnotif|length == 0 %}
+            <div class="row">
+                <div class="col text-center">
+                    <b>
+                        Vous n'avez aucune notification pour le moment.
+                    </b>
+                </div>
+            </div>
+        {% else %}
+            {% for elem in listnotif %}
+                <div class="card" style="margin-bottom:7px; border-radius: 3px;{% if elem.couleur == '#2E538B' %}
+                                    border-left: 4px solid #2E538B;
+                                {% elif elem.couleur == '#a5cf4b' %}
+                                    border-left: 4px solid #a5cf4b;
+                                {% elif elem.couleur == '#B21122' %}
+                                    border-left: 4px solid #B21122;
+                                {% else %}
+                                    border-left: 4px solid #ffc34a;
+                                {% endif %}">
+                    <div class="row" style="padding: 8px;">
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 {% if elem.couleur == '#2E538B' %}
+                                    imgdivcoldivcircleblue
+                                {% elif elem.couleur == '#a5cf4b' %}
+                                    imgdivcoldivcirclegreen
+                                {% elif elem.couleur == '#B21122' %}
+                                    imgdivcoldivcirclered
+                                {% else %}
+                                    imgdivcoldivcircleyellow
+                                {% endif %}">
+                        </div>
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                            <b>{{ elem.titre }}</b> le {{ elem.date|date:"d-m-Y" }} à {{ elem.date|date:"H:i:s" }} <br>
+                            {{ elem.texte }}&nbsp;{% if elem.lien != blank %}<a href="{{ elem.lien }}">lien</a>{% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+    {% endif %}
+    </div>
+</div>
+
+
+<script>
+    $('body').css('background', '#f2f2f2');
+
+    //setInterval(function () {$content.load('accueil');}, 300000);
+</script>

@@ -1,0 +1,368 @@
+{% load static %}
+<style>
+    @media screen and (max-width: 40em) {
+        .titrepage {
+            position: absolute;
+            top: -8vh;
+            left: 20vw;
+        }
+    }
+
+
+</style>
+<div class="contpageadminpage">
+    <div class="row" style="margin-top: 2%; margin-bottom: 2%">
+        <div class="col"><h4 class="titrepage">Ajout d'objet(s)</h4></div>
+    </div>
+
+    <div class="row">
+        <form id="FormAjoutObjet" method="POST" action="adminpage" style="padding-left: 10%; padding-right: 10%; width: 100%">
+            {% csrf_token %}
+            <div class="row champtype">
+                {{ FormObjet.type }}
+            </div>
+
+            <div class="row champslider" style="display:none;">
+                Slider :    {{ FormObjet.slider }}
+            </div>
+
+            <div class="row champparent">
+                {{ FormObjet.parent }}
+            </div>
+            <div class="ajoutnouvelleelement row" onclick="ajouterelement()">
+                <div>+</div>Ajouter
+            </div>
+            {{ FormsetObjet.management_form }}
+            <div class="listeEllement">
+                {% for form in FormsetObjet %}
+                    <div id="element_0" class="elementObjetsite" style="margin-bottom: 10px">
+                        <div class="row champnom">
+                            <div class="col">{{ form.nom }}</div>
+                            <div class="col-1" style="display: none"><div class="deletediv" onclick="supprimer(this)">X</div></div>
+                        </div>
+                        <div class="row champbdd">
+                            <div class="col">{{ form.champsbdd }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="row d-flex justify-content-center" style="padding: 10px;">
+                <button class="btndeployobjets" id="btnajoutform">Déployer</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+<script>
+    $loadingpage.css('display', 'none');
+    $('body').css('background', '#f2f2f2');
+    $FormAjoutObjet = $('#FormAjoutObjet');
+    $champtype = $('.champtype');
+    $id_parent = $('#id_parent');
+    $btnajoutform = $('#btnajoutform');
+    $listeEllement = $('.listeEllement');
+    $element_0 = $('#element_0');
+    $id_nbr = $('#id_forsmsetobjet-TOTAL_FORMS');
+    $champparent = $('.champparent');
+    $id_type = $('#id_type');
+    $champslider = $('.champslider');
+    id_type = document.getElementById('id_type');
+
+    function supprimer($elem) {
+        elementparent= $elem.parentNode.parentNode.parentNode.id;
+        $elementparent = $('#'+elementparent);
+        numeroact = parseInt(elementparent.replace( /[^\d.]/g, '' ));
+
+        elementactuelle = $elementparent.next();
+        $elementparent.remove();
+        $id_nbr.attr('value', parseInt($id_nbr.attr('value'))-1);
+
+        elementactuelle.attr('id', 'element_'+numeroact);
+
+        while(elementactuelle.hasClass( "elementObjetsite")){
+            elementactuelle.find(':input').each(function () {
+                var name = $(this).attr('name');
+                if(name) {
+                    name = name.replace('-' + (numeroact+1) + '-', '-' + numeroact + '-');
+                    var id = 'id_' + name;
+                    $(this).prop({'name': name, 'id': id})
+                }
+            });
+            numeroact++;
+            elementactuelle = elementactuelle.next();
+            elementactuelle.prop('id', 'element_'+numeroact);
+        }
+
+        $('.deletediv:first').parent().css('display', 'none');
+    }
+
+    function ajouterelement(){
+        newobj = $element_0.clone();
+        $listeEllement.append(newobj);
+        numero = parseInt($id_nbr.attr('value'));
+        newobj.attr('id', 'element_'+numero);
+
+        newobj.find(':input').each(function () {
+            var name = $(this).attr('name');
+            if(name) {
+                name = name.replace('-0-', '-' + numero + '-');
+                var id = 'id_' + name;
+                $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+            }
+        });
+        newobj.find('.deletediv').parent().css('display', 'block');
+        $id_nbr.attr('value', numero+1);
+    }
+
+    $btnajoutform.on('click', function (event) {
+        event.preventDefault();
+        $loadingpage.css('display', 'block');
+        $.ajax({
+            data: $FormAjoutObjet.serialize(),
+            type: $FormAjoutObjet.attr('method'),
+            url: $FormAjoutObjet.attr('action'),
+            success: function (response) {
+                $loadingpage.css('display', 'none');
+            }
+        });
+    });
+
+    function RaffraichirChoixtype(type) {
+        type = type.toString();
+        if(type === '6'){
+            $champslider.css('display', 'block');
+        }else{
+            $champslider.css('display', 'none');
+        }
+        switch (type) {
+            case "1":
+                if ($( "#champniveaux" ).length ) {
+                    $( "#champniveaux" ).remove()
+                }
+                if ($( "#champpole" ).length ) {
+                    $( "#champpole" ).remove();
+                }
+                if ($( "#champsociete" ).length ) {
+                    $( "#champsociete" ).remove();
+                }
+                rechargenum = 0;
+                setTimeout(function(){chargementelems('', '', $id_parent);}, 100);
+                break;
+            case "2":
+                if ($( "#champpole" ).length ) {
+                    $( "#champpole" ).remove();
+                }
+                if ($( "#champsociete" ).length ) {
+                    $( "#champsociete" ).remove();
+                }
+                rechargenum = 0;
+                if ($( "#champniveaux" ).length ) {
+                    $( "#champniveaux" ).remove()
+                }
+                setTimeout(function(){chargementelems('', '', $id_parent);}, 100);
+
+                break;
+            case "3":
+                if ($( "#champniveaux" ).length ) {
+                    $( "#champniveaux" ).remove()
+                }
+                if ($( "#champpole" ).length ) {
+                    $( "#champpole" ).remove();
+                }
+                if ($( "#champsociete" ).length ) {
+                    $( "#champsociete" ).remove();
+                }
+                rechargenum = 0;
+                setTimeout(function(){chargementelems('4', '', $id_parent);}, 100);
+
+                break;
+            case "4":
+                if (!$( "#champniveaux" ).length ) {
+                    $champtype.after('<div class="row champniveaux" id="champniveaux"><select class="form-control" id="selectniveau" onchange="RaffraichirChoixtype(4)">' +
+                        '<option value="1">Consolidé</option>' +
+                        '<option value="2">Pole</option><option value="3">Société</option></select></div>')
+                }
+                niveau = $("#selectniveau").val();
+                switch (niveau) {
+                    case "1":
+                        if ($( "#champpole" ).length ) {
+                            $( "#champpole" ).remove();
+                        }
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        rechargenum = 0;
+                        setTimeout(function(){chargementelems('1', '', $id_parent);}, 100);
+                        break;
+                    case "2":
+                        if ($( "#champpole" ).length ) {
+                            $( "#champpole" ).remove();
+                        }
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        rechargenum = 0;
+                        setTimeout(function(){chargementelems('4', '', $id_parent);}, 100);
+                        break;
+                    case "3":
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        rechargenum = 1;
+                        if (!$( "#champpole" ).length ) {
+                            $('#champniveaux').after('<div class="row champpole" id="champpole"><select class="form-control" id="selectpole" onchange="rechargerelem(0)"></select></div>')
+                        }
+                        $selectpole = $( "#selectpole" );
+                        setTimeout(function(){chargementelems('4', '', $selectpole);}, 100);
+                        setTimeout(function(){chargementelems('7', $selectpole.val(), $id_parent);}, 200);
+                        break;
+
+                    default:
+                }
+                break;
+            case "5":
+                if (!$( "#champniveaux" ).length ) {
+                    $champtype.after('<div class="row champniveaux" id="champniveaux"><select class="form-control" id="selectniveau" onchange="RaffraichirChoixtype(5)"><option value="1">Consolidé</option>' +
+                        '<option value="2">Pole</option><option value="3">Société</option></select></div>')
+                }
+                niveau = $("#selectniveau").val();
+                switch (niveau) {
+                    case "1":
+                        if ($( "#champpole" ).length ) {
+                            $( "#champpole" ).remove();
+                        }
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        rechargenum = 0;
+                        setTimeout(function(){chargementelems('2', '', $id_parent);}, 100);
+
+                        break;
+                    case "2":
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        rechargenum = 2;
+                        if (!$( "#champpole" ).length ) {
+                            $('#champniveaux').after('<div class="row champpole" id="champpole"><select class="form-control" id="selectpole" onchange="rechargerelem(1)"></select></div>')
+                        }
+                        $selectpole = $( "#selectpole" );
+                        setTimeout(function(){chargementelems('4', '', $selectpole);}, 100);
+                        setTimeout(function(){chargementelems('5', $selectpole.val(), $id_parent);}, 200);
+                        break;
+                    case "3":
+                        rechargenum = 3;
+                        if (!$( "#champpole" ).length ) {
+                            $('#champniveaux').after('<div class="row champpole" id="champpole"><select class="form-control" id="selectpole" onchange="rechargerelem(2)"></select></div>')
+                        }
+                        $selectpole = $( "#selectpole" );
+                        setTimeout(function(){chargementelems('4', '', $selectpole);}, 100);
+
+                        if (!$( "#champsociete" ).length ) {
+                            $('#champpole').after('<div class="row champsociete" id="champsociete"><select class="form-control" id="selectsociete" onchange="rechargerelem(3)"></select></div>')
+                        }
+                        $selectsociete = $('#selectsociete');
+                        setTimeout(function(){chargementelems('7', $selectpole.val(), $selectsociete);}, 200);
+                        setTimeout(function(){chargementelems('8', $selectsociete.val(), $id_parent);}, 300);
+                        break;
+                    default:
+                }
+                break;
+            case "6":
+                if (!$( "#champniveaux" ).length ) {
+                    $champtype.after('<div class="row champniveaux" id="champniveaux"><select class="form-control" id="selectniveau" onchange="RaffraichirChoixtype(6)"><option value="1">Consolidé</option>' +
+                        '<option value="2">Pole</option><option value="3">Société</option></select></div>')
+                }
+                niveau = $("#selectniveau").val();
+                switch (niveau) {
+                    case "1":
+                        if ($( "#champpole" ).length ) {
+                            $( "#champpole" ).remove();
+                        }
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        rechargenum = 0;
+                        setTimeout(function(){chargementelems('2', '', $id_parent);}, 100);
+                        break;
+                    case "2":
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        rechargenum = 2;
+                        if (!$( "#champpole" ).length ) {
+                            $('#champniveaux').after('<div class="row champpole" id="champpole"><select class="form-control" id="selectpole" onchange="rechargerelem(1)"></select></div>')
+                        }
+                        $selectpole = $( "#selectpole" );
+                        setTimeout(function(){chargementelems('4', '', $selectpole);}, 100);
+                        setTimeout(function(){chargementelems('5', $selectpole.val(), $id_parent);}, 200);
+                        break;
+                    case "3":
+                        rechargenum = 3;
+                        if (!$( "#champpole" ).length ) {
+                            $('#champniveaux').after('<div class="row champpole" id="champpole"><select class="form-control" id="selectpole" onchange="rechargerelem(2)"></select></div>')
+                        }
+                        $selectpole = $( "#selectpole" );
+                        if (!$( "#champsociete" ).length ) {
+                            $('#champpole').after('<div class="row champsociete" id="champsociete"><select class="form-control" id="selectsociete" onchange="rechargerelem(3)"></select></div>')
+                        }
+                        $selectsociete = $('#selectsociete');
+                        chargementelems('4', '', $selectpole);
+                        setTimeout(function(){
+                            console.log('element: '+$selectpole.val());
+                            chargementelems('7', $selectpole.val(), $selectsociete);
+                            setTimeout(function(){
+                                chargementelems('8', $selectsociete.val(), $id_parent);
+                            }, 200);
+                        }, 200);
+
+
+                        break;
+                    default:
+                }
+                break;
+            default:
+        }
+    }
+
+    function chargementelems(choix, idparent, $select) {
+        $.ajax({
+            type:'POST',
+            url :'parentf',
+            data : {
+                choix: choix,
+                idparent: idparent,
+                csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+            },
+            success : function(resultat){
+                $select.html(resultat);
+            }
+        });
+    }
+
+    function rechargerelem(num) {
+        switch (rechargenum) {
+            case 1:
+                chargementelems('7', $selectpole.val(), $id_parent);
+                break;
+            case 2:
+                chargementelems('5', $selectpole.val(), $id_parent);
+                break;
+            case 3:
+                if(num === 2){
+                    chargementelems('7', $selectpole.val(), $selectsociete);
+                    setTimeout(function(){chargementelems('8', $selectsociete.val(), $id_parent);}, 100);
+                }
+                else if(num === 3){
+                    chargementelems('8', $selectsociete.val(), $id_parent);
+                }
+                break;
+            default:
+        }
+    }
+
+    </script>

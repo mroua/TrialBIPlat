@@ -1,0 +1,188 @@
+{% load static %}
+<style>
+    #wrap {
+        display: inline-block;
+        position: relative;
+        height: 40px;
+        float: right;
+        padding: 0;
+    }
+
+    input[type="text"] {
+        height: 40px;
+        font-size: 20px;
+        display: inline-block;
+        font-weight: 100;
+        border: none;
+        outline: none;
+        color: #555;
+        padding: 3px;
+        padding-right: 60px;
+        width: 300px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: none;
+        z-index: 3;
+        transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+        cursor: pointer;
+    }
+
+    input[type="submit"] {
+        height: 43px;
+        width: 63px;
+        display: inline-block;
+        float: right;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADNQTFRFU1NT9fX1lJSUXl5e1dXVfn5+c3Nz6urqv7+/tLS0iYmJqampn5+fysrK39/faWlp////Vi4ZywAAABF0Uk5T/////////////////////wAlrZliAAABLklEQVR42rSWWRbDIAhFHeOUtN3/ags1zaA4cHrKZ8JFRHwoXkwTvwGP1Qo0bYObAPwiLmbNAHBWFBZlD9j0JxflDViIObNHG/Do8PRHTJk0TezAhv7qloK0JJEBh+F8+U/hopIELOWfiZUCDOZD1RADOQKA75oq4cvVkcT+OdHnqqpQCITWAjnWVgGQUWz12lJuGwGoaWgBKzRVBcCypgUkOAoWgBX/L0CmxN40u6xwcIJ1cOzWYDffp3axsQOyvdkXiH9FKRFwPRHYZUaXMgPLeiW7QhbDRciyLXJaKheCuLbiVoqx1DVRyH26yb0hsuoOFEPsoz+BVE0MRlZNjGZcRQyHYkmMp2hBTIzdkzCTc/pLqOnBrk7/yZdAOq/q5NPBH1f7x7fGP4C3AAMAQrhzX9zhcGsAAAAASUVORK5CYII=) center center no-repeat;
+        text-indent: -10000px;
+        border: none;
+        position: absolute;
+        outline: none;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        cursor: pointer;
+        opacity: 0.4;
+        transition: opacity .4s ease;
+    }
+
+    input[type="submit"]:hover {
+        opacity: 0.8;
+    }
+
+    @media screen and (max-width: 40em) {
+        .titrepage {
+            position: absolute;
+            left: 20vw;
+        }
+    }
+</style>
+<div class="contpageautorisation">
+    <div class="row" style="margin-top: 2%; margin-bottom: 2%">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 divaddelementauth" onclick="newajout()" style="cursor: pointer" data-toggle="modal" data-target="#addauthpopup" title="Attribuer une nouvelle autorisation">
+            <div>+</div>
+            <h4 class="titrepage">Ajout d'autorisation</h4>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div id="wrap">
+                <input id="searchmsgact" name="search" type="text" placeholder="Recherche">
+                <input id="search_submit" value="Rechercher" type="submit" data-toggle="modal" data-target="#recherchemessage">
+            </div>
+        </div>
+    </div>
+    {% if tovalidate %}
+        <h6>Autorisation à valider: </h6>
+    {% endif %}
+    <div class="contvalidate">
+        {% for elem in tovalidate %}
+            <div class="card cardorg mb-3 mt-3" style="padding: 12px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="row">
+                            <div class="col-2 imgdivcoldivadminauthorg"></div>
+                            <div class="col-10">{{ elem.user.first_name }}{{ elem.id }}</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        {% if elem.objetsite.type == "1" or elem.objetsite.type == "2" or elem.objetsite.type == "3"%}
+                            {{ elem.objetsite.nom }}
+                            {% else %}
+                            {{ elem.objetsite.parent.nom }}/ {{ elem.objetsite.nom }}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">{{ elem.get_action_display }}</div>
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">{{ elem.userchoix }}</div>
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">{{ elem.dateact|date:'d/m/Y' }}</div>
+                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 text-center"  style="cursor: pointer; color: #c24157" onclick="authaction({{ elem.id }},'refus', this)">Refuser</div>
+                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 text-center"  style="cursor: pointer; color: #a5cf4b; border-left: 1px solid rgba(0,0,0,.125);" onclick="authaction({{ elem.id }},'valider', this)">Valider</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <h6>Utilisateurs: </h6>
+    <div class="contmessageslist">
+        {% for elem in liste_util %}
+            <div class="card cardvert mb-3 mt-3" data-toggle="modal" data-target="#autorisationuserpopup" onclick="afficherautorisation({{ elem.id }})" style="padding: 10px; cursor: pointer;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="row">
+                            <div class="col-2 imgdivcoldivadminauthvert"></div>
+                            <div class="col-10">{{ elem.user }}</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">{{ elem.ad2000 }}</div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">{{ elem.email }}</div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">{{ elem.societe }}</div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">{{ elem.auto }}</div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="autorisationuserpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document" id="divcontauthuser">
+
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="addauthpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelpopup" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" id="contpageaddauth" style="background: transparent; border: none">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $loadingpage.css('display', 'none');
+    $('body').css('background', '#f2f2f2');
+    $divcontauthuser = $('#divcontauthuser');
+    $contpageaddauth = $('#contpageaddauth');
+    $addauthpopup = $('#addauthpopup');
+    $searchmsgact = $("#searchmsgact");
+    function afficherautorisation(userid) {
+        $divcontauthuser.load('authuser/'+userid)
+    }
+
+    function newajout() {
+        $contpageaddauth.load('newauth')
+    }
+
+    function authaction(idauth, action, elem) {
+        $loadingpage.css('display', "block");
+        $.ajax({
+            url: 'authact',
+            data: {
+                'idauth': idauth,
+                'action': action,
+                csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+            },
+            type: 'post',
+            success: function (data) {
+                elem.parentNode.parentNode.parentNode.parentNode.remove();
+                $loadingpage.css('display',"none");
+            },
+        });
+    }
+
+    $searchmsgact.on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".card").filter(function() {
+            if($(this).text().toLowerCase().indexOf(value) > -1 === false){
+                $(this).parent().css('display', 'none');
+            }else{
+                $(this).parent().css('display', 'block');
+            }
+        });
+    });
+
+    //setInterval(function () {$content.load('authadmin');}, 300000);
+</script>

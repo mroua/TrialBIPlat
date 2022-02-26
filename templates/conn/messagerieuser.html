@@ -1,0 +1,208 @@
+<style>
+    .searchinput #wrap {
+        display: inline-block;
+        position: relative;
+        height: 40px;
+        float: right;
+        padding: 0;
+    }
+
+    .searchinput input[type="text"] {
+        height: 40px;
+        font-size: 20px;
+        display: inline-block;
+        font-weight: 100;
+        border: none;
+        outline: none;
+        color: #555;
+        padding: 3px;
+        padding-right: 60px;
+        width: 300px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: none;
+        z-index: 3;
+        transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+        cursor: pointer;
+    }
+
+    .searchinput input[type="submit"] {
+        height: 43px;
+        width: 63px;
+        display: inline-block;
+        float: right;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADNQTFRFU1NT9fX1lJSUXl5e1dXVfn5+c3Nz6urqv7+/tLS0iYmJqampn5+fysrK39/faWlp////Vi4ZywAAABF0Uk5T/////////////////////wAlrZliAAABLklEQVR42rSWWRbDIAhFHeOUtN3/ags1zaA4cHrKZ8JFRHwoXkwTvwGP1Qo0bYObAPwiLmbNAHBWFBZlD9j0JxflDViIObNHG/Do8PRHTJk0TezAhv7qloK0JJEBh+F8+U/hopIELOWfiZUCDOZD1RADOQKA75oq4cvVkcT+OdHnqqpQCITWAjnWVgGQUWz12lJuGwGoaWgBKzRVBcCypgUkOAoWgBX/L0CmxN40u6xwcIJ1cOzWYDffp3axsQOyvdkXiH9FKRFwPRHYZUaXMgPLeiW7QhbDRciyLXJaKheCuLbiVoqx1DVRyH26yb0hsuoOFEPsoz+BVE0MRlZNjGZcRQyHYkmMp2hBTIzdkzCTc/pLqOnBrk7/yZdAOq/q5NPBH1f7x7fGP4C3AAMAQrhzX9zhcGsAAAAASUVORK5CYII=) center center no-repeat;
+        background-size: contain;
+        text-indent: -10000px;
+        border: none;
+        position: absolute;
+        outline: none;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        cursor: pointer;
+        opacity: 0.4;
+        transition: opacity .4s ease;
+    }
+
+    @media screen and (max-width: 40em) {
+        .titrepage {
+            position: absolute;
+            top: -6vh;
+            left: 20vw;
+        }
+    }
+
+    .searchinput input[type="submit"]:hover {
+        opacity: 0.8;
+    }
+</style>
+<div class="row" style="margin-top: 2%; margin-bottom: 2%">
+    <div class="col-2">
+        <h4 class="titrepage">Messagerie</h4>
+    </div>
+    <div class="col-10">
+        <div id="wrap" class="searchinput">
+            <input id="searchmsgact" name="search" type="text" placeholder="Recherche">
+            <input id="search_submit" value="Rechercher" type="submit" data-toggle="modal" data-target="#recherchemessage" >
+        </div>
+    </div>
+</div>
+<div class="contmessages">
+    {% for msg in liste_messagerie %}
+        <div class="card msgticket
+            {% if msg.type == '1' %}
+                cardred
+            {% elif msg.type == '2' %}
+                cardorg
+            {% elif msg.type == '3' %}
+                cardblue
+            {% else %}
+                cardvert
+            {% endif %} mb-3 mt-3">
+            <div class="row"  data-toggle="modal" data-target="#messagecontpopup" onclick="chargementmessageact({{ msg.messagerie.id }})">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="row">
+                        <div class="col-2 {% if msg.type == '1' %}
+                            imgdivcoldivadminauthred
+                        {% elif msg.type == '2' %}
+                            imgdivcoldivadminauthorg
+                        {% elif msg.type == '3' %}
+                            imgdivcoldivadminauthblue
+                        {% else %}
+                            imgdivcoldivadminauthvert
+                        {% endif %}"></div>
+                        <div class="col-10">{{ msg.messagerie.designation }}</div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">{{ msg.messagerie.sujet }}</div>
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">{{ msg.get_type_display }}</div>
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">{{ msg.messagerie.date|date:"d/m/Y" }}</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="messagecontpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelpopup" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background: transparent; border: none">
+            <div class="modal-body" id="contenaire_messagerie">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="recherchemessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rechercher un message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    {% csrf_token %}
+                    <input class="form-control" id="msgdesignation" placeholder="Ad2000/Sujet">
+                    <input class="form-control" id="msgdate" type="date">
+                    <select class="form-control" id="msgtype">
+                        <option value="0">Inconnu</option>
+                        <option value="1">Recue</option>
+                        <option value="2">En-cours</option>
+                        <option value="3">Validation</option>
+                        <option value="4">Confirmation</option>
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="col"><button id="lancerrecherchemsg" class="btn btn-block btn-primary">Rechercher</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $loadingpage.css('display', 'none');
+    $('body').css('background', '#f2f2f2');
+    $lancerrecherchemsg = $('#lancerrecherchemsg');
+    $msgdesignation = $('#msgdesignation');
+    $msgdate = $('#msgdate');
+    $msgtype = $('#msgtype');
+    $exampleModalLabel = $('#exampleModalLabelpopup');
+    $contenaire_messagerie = $('#contenaire_messagerie');
+    $searchmsgact = $("#searchmsgact");
+    $contmessages = $(".contmessages");
+
+    function chargementmessageact(ident) {
+        $contenaire_messagerie.load("information/"+ident);
+    }
+
+
+    $lancerrecherchemsg.on('click', function () {
+        $.ajax({
+            type:'POST',
+            url: "recherchemsg",
+            data:
+                {
+                    'designation': $msgdesignation.val(),
+                    'date': $msgdate.val(),
+                    'type': $msgtype.val(),
+                    csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+                },
+            success: function(data){
+                donnee = JSON.parse(data);
+                for(i=0; i<donnee['id']; i++) {
+                    if (donnee['etatid'][i] === '1') {
+                        state = 'alert-danger'
+                    }
+                    else if(donnee['etatid'][i] ==='2') {
+                        state = 'alert-warning'
+                    }
+                    else if(donnee['etatid'][i] ==='3') {
+                        state = 'alert-info'
+                    }
+                    else{
+                        state = 'alert-success'
+                    }
+                    $contmessages.append('<div class="alert '+state+'>icicici</div>');
+                }
+            }
+        });
+    });
+
+    $searchmsgact.on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".contmessages .row").filter(function() {
+            if($(this).text().toLowerCase().indexOf(value) > -1 === false){
+                $(this).parent().css('display', 'none');
+            }else{
+                $(this).parent().css('display', 'block');
+            }
+        });
+    });
+
+    //setInterval(function () {$content.load('messagerie');}, 300000);
+</script>

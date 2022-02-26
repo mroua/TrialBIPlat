@@ -1,0 +1,1546 @@
+<style>
+    .contparent{
+        border: 1px solid #000000;
+        padding:10px
+    }
+
+    .nomutilisateur, .titrepageautouser{
+        font-weight: bold;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-header">
+            <div class="col-4"><hr></div>
+            <div class="col-4 text-center titrepageautouser">Autorisation {{ profileuser.utilisateur.username }}</div>
+            <div class="col-4"><hr></div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -10px;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+    <div class="modal-body">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                <img id="photo_user" src="data:image/jpeg;base64,{{ profileuser.photo }}" style="display: block; width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(0,0,0,.125)">
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 text-center nomutilisateur">
+                {{ profileuser.utilisateur.first_name }}
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 text-center">
+                {{ profileuser.poste }}
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 text-center">
+                {{ profileuser.societe.nom }}
+            </div>
+        </div>
+
+
+        <button type="button" class="btn btn-outline-info btnacti active" onclick="afficherdiv('active')">Active</button>
+        <button type="button" class="btn btn-outline-info btndesa" onclick="afficherdiv('desactive')">Supprimer</button>
+        <button type="button" class="btn btn-outline-info btnrefu" onclick="afficherdiv('refuser')">Refuser</button>
+    </div>
+
+    <div class="divactive" style="padding: 10px; height: 600px; overflow-y: auto">
+        {% if choix == 1 %}
+            <div class="card text-white bg-success mb-3" id="div_{{ element.objetsite.nom.value.split|join:"_" }}_{{ element.objetsite.id }}" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-5" style="cursor: pointer" onclick="afficherenfants(this, {{ element.objetsite.id }}, {{ profileuser.id }}, 1, {{ element.type }})">{{ element.objetsite.nom }}</div>
+                    <div class="col-3">{{ element.useradd }}</div>
+                    <div class="col-2">{{ element.dateajout|date:"d/m/Y" }}</div>
+                    <div class="col-2" style="cursor: pointer" onclick="supprimerauth({{ element.objetsite.id }}, {{ profileuser.id }})">Supprimer</div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <div class="divdeactive" style="display: none; padding: 10px; height: 600px; overflow-y: auto">
+        {% for elem in liste_autorisation_ancienne %}
+            <div class="card text-white bg-dark mb-3" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-7">{{ elem.objetsite.nom }}</div>
+                    <div class="col-3">{{ elem.userdel }}</div>
+                    <div class="col-2">{{ elem.datesuppr|date:"d/m/Y" }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="divrefuser" style="display: none; padding: 10px; height: 600px; overflow-y: auto">
+        {% for elem in liste_autorisation_ancienne %}
+            <div class="card text-white bg-dark mb-3" style="padding: 10px;">
+                <div class="row">
+                    <div class="col-7">{{ elem.objetsite.nom }}</div>
+                    <div class="col-3">{{ elem.userdel }}</div>
+                    <div class="col-2">{{ elem.datesuppr|date:"d/m/Y" }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    $btndesa = $('.btndesa');
+    $btnacti = $('.btnacti');
+    $divactive = $('.divactive');
+    $divdeactive = $('.divdeactive');
+
+    function supprimerauth(idobj, profilid) {
+        $.ajax({
+            url: 'delauth',
+            data: {
+                'idobj': idobj,
+                'profilid': profilid,
+                csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+            },
+            type: 'post',
+            success: function (data) {
+                // success handling...
+            },
+        });
+    }
+    function afficherenfants(elem, idobj, profileid, active, type) {
+        if(type !== 6){
+            divparent = elem.parentNode.parentNode.id;
+            divcont = divparent.replace("div", "contenaire_enfant");
+            if($('#'+divcont).length){
+                elem = $('#'+divcont);
+                elem.toggle();
+
+            }
+            else{
+                $('#'+divparent).after('<div class="contparent" id="'+divcont+'"></div>');
+                $.ajax({
+                    url: 'getchilds',
+                    data: {
+                        'idobj': idobj,
+                        'profileid': profileid,
+                        'active': active,
+                        csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+                    },
+                    type: 'post',
+                    success: function (data) {
+
+                        donnee = JSON.parse(data);
+                        if(donnee["listenom"].length === 0){
+                            $('#'+divcont).append('<div class="row text_center">cette element est vide</div>')
+                        }else{
+
+                            for(i = 0; i<donnee["listenom"].length; i++){
+                                $('#'+divcont).append('<div class="card text-white bg-success mb-3" id="div_'+donnee["listenom"][i]+'_'+donnee["listeid"][i]+'" style="padding: 10px;">' +
+                                    '<div class="row">' +
+                                    '<div class="col-10" style="cursor: pointer" onclick="afficherenfants(this,' +
+                                    ''+donnee["listeid"][i]+','+profileid+','+active+', '+donnee["listetype"][i]+')">'+donnee["listenom"][i]+'</div>' +
+                                    '<div class="col-2" style="cursor: pointer" onclick="supprimerauth('+donnee["listeid"][i]+', '+profileid+')">Supprimer</div></div></div>')
+                            }
+
+                        }
+                    },
+                });
+            }
+        }
+
+    }
+
+    function afficherdiv(choix) {
+        if(choix === "active"){
+            $btndesa.removeClass('active');
+            $btnacti.addClass('active');
+            $divactive.css('display','block');
+            $divdeactive.css('display','none');
+        }else{
+            $btnacti.removeClass('active');
+            $btndesa.addClass('active');
+            $divactive.css('display','none');
+            $divdeactive.css('display','block');
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    #wrap {
+        display: inline-block;
+        position: relative;
+        height: 40px;
+        float: right;
+        padding: 0;
+    }
+
+    input[type="text"] {
+        height: 40px;
+        font-size: 20px;
+        display: inline-block;
+        font-weight: 100;
+        border: none;
+        outline: none;
+        color: #555;
+        padding: 3px;
+        padding-right: 60px;
+        width: 300px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: none;
+        z-index: 3;
+        transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+        cursor: pointer;
+    }
+
+    input[type="submit"] {
+        height: 43px;
+        width: 63px;
+        display: inline-block;
+        float: right;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADNQTFRFU1NT9fX1lJSUXl5e1dXVfn5+c3Nz6urqv7+/tLS0iYmJqampn5+fysrK39/faWlp////Vi4ZywAAABF0Uk5T/////////////////////wAlrZliAAABLklEQVR42rSWWRbDIAhFHeOUtN3/ags1zaA4cHrKZ8JFRHwoXkwTvwGP1Qo0bYObAPwiLmbNAHBWFBZlD9j0JxflDViIObNHG/Do8PRHTJk0TezAhv7qloK0JJEBh+F8+U/hopIELOWfiZUCDOZD1RADOQKA75oq4cvVkcT+OdHnqqpQCITWAjnWVgGQUWz12lJuGwGoaWgBKzRVBcCypgUkOAoWgBX/L0CmxN40u6xwcIJ1cOzWYDffp3axsQOyvdkXiH9FKRFwPRHYZUaXMgPLeiW7QhbDRciyLXJaKheCuLbiVoqx1DVRyH26yb0hsuoOFEPsoz+BVE0MRlZNjGZcRQyHYkmMp2hBTIzdkzCTc/pLqOnBrk7/yZdAOq/q5NPBH1f7x7fGP4C3AAMAQrhzX9zhcGsAAAAASUVORK5CYII=) center center no-repeat;
+        text-indent: -10000px;
+        border: none;
+        position: absolute;
+        outline: none;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        cursor: pointer;
+        opacity: 0.4;
+        transition: opacity .4s ease;
+    }
+
+    @media screen and (max-width: 40em) {
+        .titrepage {
+            position: absolute;
+            top: -6vh;
+            left: 20vw;
+        }
+    }
+
+    input[type="submit"]:hover {
+        opacity: 0.8;
+    }
+</style>
+<div class="row" style="margin-top: 2%; margin-bottom: 2%">
+    <div class="col-2">
+        <h4 class="titrepage">Messagerie</h4>
+    </div>
+    <div class="col-10">
+        <div id="wrap">
+            <input id="searchmsgact" name="search" type="text" placeholder="Recherche">
+            <input id="search_submit" value="Rechercher" type="submit" data-toggle="modal" data-target="#recherchemessage" >
+        </div>
+    </div>
+</div>
+<div class="contmessages">
+    {% for msg in liste_messagerie %}
+        <div class="alert
+            {% if msg.type == '1' %}alert-danger{% elif msg.type == '2' %}alert-warning{% elif msg.type == '3' %}alert-info{% else %}alert-success{% endif %}
+            "role="alert">
+            <div class="row"  data-toggle="modal" data-target="#messagecontpopup"
+                 onclick="chargementmessageact({{ msg.messagerie.id }}, '{{ msg.messagerie.sujet }}')">
+                <div class="col-2">{{ msg.messagerie.designation }}</div>
+                <div class="col-6">{{ msg.messagerie.sujet }}</div>
+                <div class="col-2">{{ msg.get_type_display }}</div>
+                <div class="col-2">{{ msg.messagerie.date|date:"d/m/Y" }}</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<div class="modal fade bd-example-modal-lg" id="messagecontpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelpopup" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background: transparent; border: none">
+            <div class="modal-body" id="contenaire_messagerie">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="recherchemessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rechercher un message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    {% csrf_token %}
+                    <input class="form-control" id="msgdesignation" placeholder="Ad2000/Sujet">
+                    <input class="form-control" id="msgdate" type="date">
+                    <select class="form-control" id="msgtype">
+                        <option value="0">Inconnu</option>
+                        <option value="1">Recue</option>
+                        <option value="2">En-cours</option>
+                        <option value="3">Validation</option>
+                        <option value="4">Confirmation</option>
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="col"><button id="lancerrecherchemsg" class="btn btn-block btn-primary">Rechercher</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $lancerrecherchemsg = $('#lancerrecherchemsg');
+    $msgdesignation = $('#msgdesignation');
+    $msgdate = $('#msgdate');
+    $msgtype = $('#msgtype');
+    $exampleModalLabel = $('#exampleModalLabelpopup');
+    $contenaire_messagerie = $('#contenaire_messagerie');
+    $searchmsgact = $("#searchmsgact");
+    $contmessages = $(".contmessages");
+
+    function chargementmessageact(ident, sujet) {
+        $exampleModalLabel.html(sujet);
+        $contenaire_messagerie.load("information/"+ident);
+    }
+
+
+    $lancerrecherchemsg.on('click', function () {
+        $.ajax({
+            type:'POST',
+            url: "recherchemsg",
+            data:
+                {
+                    'designation': $msgdesignation.val(),
+                    'date': $msgdate.val(),
+                    'type': $msgtype.val(),
+                    csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+                },
+            success: function(data){
+                donnee = JSON.parse(data);
+                for(i=0; i<donnee['id']; i++) {
+                    if (donnee['etatid'][i] === '1') {
+                        state = 'alert-danger'
+                    }
+                    else if(donnee['etatid'][i] ==='2') {
+                        state = 'alert-warning'
+                    }
+                    else if(donnee['etatid'][i] ==='3') {
+                        state = 'alert-info'
+                    }
+                    else{
+                        state = 'alert-success'
+                    }
+                    $contmessages.append('<div class="alert '+state+'</div>');
+                }
+            }
+        });
+    });
+
+    $searchmsgact.on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".contmessages .row").filter(function() {
+            if($(this).text().toLowerCase().indexOf(value) > -1 === false){
+                $(this).parent().css('display', 'none');
+            }else{
+                $(this).parent().css('display', 'block');
+            }
+        });
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import datetime
+import json
+import re
+import time
+from pprint import pprint
+
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models import Q
+import requests
+
+
+# Create your views here.
+from django.urls import reverse
+from django.utils import timezone
+
+from Login.models import PROFILE, OBJETSITE, HISTORIQUELOGIN, Pages
+from bi.form import AjoutOjetSiteForm, OjetSiteFormset, MessagerieForm, AutorisationForm
+from bi.models import EtapeProbleme, Messagerie, Autorisation
+
+
+page = 'accueil'
+lien = ''
+idrap = ''
+
+def getdirectionschild(element):
+    enfant_act = OBJETSITE.objects.get(id=element)
+    if(enfant_act.type == '6'):
+        if enfant_act.slider == False:
+            return ['RAPPORT', {'nom': enfant_act.nom, 'lien': enfant_act.lien, 'id': enfant_act.id}]
+
+    else:
+        if(enfant_act.type == '2'):
+            liste_enfant = OBJETSITE.objects.filter(parent__nom=enfant_act.nom, type='4')
+
+        else:
+            liste_enfant = OBJETSITE.objects.filter(parent__nom=enfant_act.nom)
+
+        liste=[]
+        liste.append(enfant_act.nom+'---'+str(enfant_act.id)+'---')
+        for enfant in liste_enfant:
+            liste.append(getdirectionschild(enfant.id))
+        return liste
+
+def TCAut():
+    try:
+        consolide = getdirectionschild(OBJETSITE.objects.get(type='1', nom='Consolidé').id)
+        liste_pole = OBJETSITE.objects.filter(type='2')
+        pole= ['Poles---P---']
+
+        for poleenfant in liste_pole:
+            pole.append(getdirectionschild(poleenfant.id))
+
+        liste_societe = OBJETSITE.objects.filter(type='3')
+        societe = ['Societe---S---']
+        for societeenfant in liste_societe:
+            societe.append(getdirectionschild(societeenfant.id))
+
+        return [consolide, pole, societe]
+    except Exception:
+        return []
+
+def parentinit(elem, liste):
+    liste.append(elem)
+    if(elem.type in ['1', '2', '3']):
+        return(liste[::-1])
+    else:
+        return(parentinit(elem.parent, liste))
+
+def GetChildbyId(elem):
+    if (elem.type == '5'):
+        return ['RAPPORT', {'nom': elem.nom, 'lien': elem.lien}]
+    else:
+        liste_enfant = OBJETSITE.objects.filter(parent=elem)
+
+        liste = []
+        liste.append(elem.nom)
+        for enfant in liste_enfant:
+            liste.append(getdirectionschild(enfant.id))
+        return liste
+
+def GetRapport(elem, listerapport):
+    if (elem.type == '5'):
+        return listerapport.append(elem)
+    else:
+        liste_enfant = OBJETSITE.objects.filter(parent=elem)
+
+        for enfant in liste_enfant:
+            return (GetRapport(enfant, listerapport))
+
+def Verification2(liste, param):
+    if isinstance(liste, list):
+        if liste[0] == 'RAPPORT':
+            objet_verification = OBJETSITE.objects.get(id=liste[1]['id'])
+            listeanciens = []
+            parentinit(objet_verification, listeanciens)
+            elems_in_both_lists = set(listeanciens) & set(param)
+            if len(elems_in_both_lists) == 0:
+                liste.clear()
+        else:
+            if isinstance(liste[0], str):
+                result = int(liste[0][liste[0].find('---') + len('---'):liste[0].rfind('---')])
+
+                if(result == 2 or result == 3):
+                    for i in range(1, len(liste)):
+                        Verification2(liste[i], param)
+                else:
+                    objet_verification = OBJETSITE.objects.get(id=result)
+
+                    ind = 0
+                    droit = False
+
+                    while (ind < len(param) and droit == False):
+                        listeanciens = []
+                        parentinit(param[ind], listeanciens)
+                        if(objet_verification in listeanciens):
+                            droit = True
+                        ind = ind + 1
+                    if(droit):
+                        for i in range(1, len(liste)):
+                            Verification2(liste[i], param)
+                    else:
+                        liste.clear()
+
+def GetType(param, liste):
+    if (param.type in ['1', '2', '3']):
+        return (liste)
+    else:
+        liste.append(param.parent)
+        return liste.append(GetType(param.parent, liste))
+
+def Decortic(param):
+    consolide = getdirectionschild(OBJETSITE.objects.get(type='1', nom='Consolidé').id)
+    liste_pole = OBJETSITE.objects.filter(type='2')
+    pole = ['Poles---2---']
+
+    for poleenfant in liste_pole:
+        pole.append(getdirectionschild(poleenfant.id))
+
+    liste_societe = OBJETSITE.objects.filter(type='3')
+    societe = ['Societe---3---']
+    for societeenfant in liste_societe:
+        societe.append(getdirectionschild(societeenfant.id))
+
+
+    Verification2(consolide, param)
+    Verification2(pole, param)
+    Verification2(societe, list(param))
+
+    listeaenvoyer = []
+    consolide = [x for x in consolide if x != []]
+    pole = [x for x in pole if x != []]
+    societe = [x for x in societe if x != []]
+    if(len(consolide) >0):
+        listeaenvoyer.append(consolide)
+    if (len(pole) > 1):
+        listeaenvoyer.append(pole)
+    if (len(societe) > 1):
+        listeaenvoyer.append(societe)
+
+    return listeaenvoyer
+
+def chargementlisteauto(util):
+    profil = PROFILE.objects.get(utilisateur=util)
+    type = profil.type_autorisation
+    if(type == 'TC'):
+        return TCAut()
+    else:
+        return(Decortic(profil.id_objet.all()))
+
+def getancetrelist(elem, liste):
+    if(elem.parent == None):
+        liste.append(elem.nom+'/')
+        return liste.reverse()
+    else:
+        liste.append(elem.nom+'/')
+        getancetrelist(elem.parent, liste)
+
+def getancetrelistobject(elem, liste):
+    if(elem.parent == None):
+        liste.append(elem)
+        return liste
+    else:
+        liste.append(elem)
+        getancetrelistobject(elem.parent, liste)
+
+def newhysto(userid, type, elementnomid):
+        if(type == 'rapport'):
+            historique = HISTORIQUELOGIN.objects.create(content_object=User.objects.get(id= int(userid)), type_object = OBJETSITE.objects.get(id= int(elementnomid)))
+            historique.save()
+
+        else:
+            historique = HISTORIQUELOGIN.objects.create(content_object=User.objects.get(id= int(userid)), type_object = Pages.objects.get(pagenom=elementnomid))
+            historique.save()
+
+        return historique.id
+
+def tableaudebordenfs(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profil = PROFILE.objects.get(utilisateur=request.user)
+        type = profil.type_autorisation
+        if request.method == 'POST':
+            parent = request.POST['parent']
+            if(parent == 'dash'):
+                if (type == 'TC'):
+                    liste=[
+                        {'type': 'dir',
+                         'enfants': 'Consolidé---1---',
+                         'descendance': 'oui'
+                         },{'type': 'dir',
+                         'enfants': 'Poles---P---',
+                         'descendance': 'oui'
+                         },{'type': 'dir',
+                         'enfants': 'Societe---S---',
+                         'descendance': 'oui'
+                         }
+                    ]
+                    return HttpResponse(json.dumps(liste, cls=DjangoJSONEncoder))
+                else:
+                    liste = []
+                    if(profil.id_objet.filter(ancetretype='1').first()):
+                        liste.append({'type': 'dir', 'enfants': 'Consolidé---1---', 'descendance': 'oui'})
+                    if (profil.id_objet.filter(ancetretype='2').first()):
+                        liste.append({'type': 'dir', 'enfants': 'Poles---P---', 'descendance': 'oui'})
+                    if (profil.id_objet.filter(ancetretype='3').first()):
+                        liste.append({'type': 'dir', 'enfants': 'Societe---S---', 'descendance': 'oui'})
+
+                    return HttpResponse(json.dumps(liste,cls=DjangoJSONEncoder))
+            else:
+                if(parent == 'P'):
+                    liste_auto = profil.id_objet.filter(type='2')
+                elif(parent == 'S'):
+                    liste_auto = profil.id_objet.filter(type='2')
+                else:
+                    liste_auto = profil.id_objet.filter(parent__id=int(parent))
+                liste = []
+                for elem in liste_auto:
+                    if(elem.type == '6'):
+                        dir = 'rap'
+                        descendance = 'non'
+                    else:
+                        dir = 'dir'
+                        liste2 = profil.id_objet.filter(parent=elem)
+                        if(not len(liste2)):
+                            descendance = 'non'
+                        else:
+                            descendance = 'oui'
+                    enfants = elem.nom+'---'+str(elem.id)+'----'
+                    lien = elem.lien
+                    liste.append({'dir': dir, 'descendance': descendance, 'enfants': enfants, 'lien': lien})
+                return HttpResponse(json.dumps(liste, cls=DjangoJSONEncoder))
+        else:
+            return redirect('/')
+
+def verifierelement(liste):
+    for element in liste:
+        if(element.parent not in liste and element.type != '3'):
+            if (element.parent is not None):
+                liste.append(element.parent)
+                verifierelement(liste)
+
+    return liste
+
+def tableaudebordenfs2(user):
+    profil = PROFILE.objects.get(utilisateur=user)
+    liste= []
+    liste2= []
+    if(profil.type_autorisation == 'TC'):
+        liste2 = OBJETSITE.objects.all()
+    else:
+        liste_auto = profil.id_objet.all()
+        for elem in liste_auto:
+            liste2.append(elem)
+
+        verifierelement(liste2)
+
+    for elem in liste2:
+        if(elem.parent is None or elem.type == '3'):
+            if(elem.type == '1'):
+                idparent = 'dash'
+            elif(elem.type == '2'):
+                idparent = 'P'
+            else:
+                idparent = 'S'
+        else:
+            idparent = str(elem.parent.id)
+        liste.append({'id': elem.id,'parent_id': idparent, 'nom': elem.nom, 'lien': str(elem.lien),'type': elem.type})
+    liste = sorted(liste, key=lambda k: k['type'])
+    return liste
+
+def home(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        msg = MessagerieForm(request.POST)
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if request.method == 'POST':
+            try:
+                msg = MessagerieForm(request.POST, request.FILES)
+                if msg.is_valid():
+                    messagerie = msg.save()
+                    messagerie.utilisateur = profile.utilisateur
+                    messagerie.designation = profile.utilisateur.username
+                    messagerie.save()
+                    id_messagerie = messagerie.id
+                    EtapeProbleme.objects.create(messagerie=messagerie).save()
+                    return HttpResponse(id_messagerie)
+            except Exception :
+                return HttpResponse('Error')
+        else:
+            global page, lien, idrap
+
+            anciennepage = page
+            ancienlien = lien
+            ancienid = idrap
+            page = 'accueil'
+            lien = ''
+            idrap = ''
+            auth = tableaudebordenfs2(request.user)
+            return render(request, 'conn/index.html', {'profile': profile,
+                                                       'auth': auth,
+                                                       'idhysto': 0,
+                                                       'msg' : msg,
+                                                       'idrapport':ancienid,
+                                                       'lien': ancienlien,
+                                                       'page': anciennepage})
+
+def adminpage(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin):
+
+            if request.method == 'POST':
+                modelform = AjoutOjetSiteForm(request.POST)
+                forsmsetobjet = OjetSiteFormset(request.POST, prefix='forsmsetobjet')
+                if(modelform.is_valid()):
+                    type = int(modelform.cleaned_data['type'])
+                    parent = modelform.cleaned_data['parent']
+                    slider = modelform.cleaned_data['slider']
+
+                if (forsmsetobjet.is_valid()):
+                    for form in forsmsetobjet:
+                        element = form.save()
+                        element.type = type
+                        element.parent = parent
+                        element.save()
+                        ancetre = gettypeancetre(element)
+                        element.ancetrenom = ancetre.nom
+                        element.ancetretype = ancetre.type
+                        element.save()
+                        liste1 = []
+                        getancetrelist(element, liste1)
+                        if liste1[0] == 'Consolidé/':
+                            liste1[0] = 'Direction Générale Groupe'
+                            if(len(liste1) > 1):
+                                liste1[0] = 'Direction Générale Groupe/'
+
+                        element.lienaut = "https://mybissrs.groupe-hasnaoui.com/reports/manage/catalogitem/addrole/"+''.join(map(str, liste1))
+                        element.liensup = "https://mybissrs.groupe-hasnaoui.com/reports/manage/catalogitem/security/"+''.join(map(str, liste1))
+                        if(element.lien != "" and type == 6):
+                            element.lien = element.lien+"&rs:embed=true"
+                            element.slider = slider
+                        element.save()
+
+                        liste = []
+                        getancetrelistobject(element, liste)
+
+                        listeprofile = PROFILE.objects.filter(Q(id_objet__in=liste) | Q(type_autorisation='TC')).distinct()
+                        for profile in listeprofile:
+                            idnum = (profile.id_objet.through.objects.latest('id').id)+1
+                            try:
+                                newauth = profile.id_objet.through.objects.create(id=idnum, profile_id=profile.id,objetsite_id=element.id)
+                                newauth.save()
+                                requests.post("http://10.10.10.64:8585/autorisationrap/?type=ajout&lien=" + element.lienaut + "&utilisateur=" + profile.utilisateur.username)
+                            except Exception:
+                                pass
+                    return HttpResponse('Success')
+            else:
+                FormObjet = AjoutOjetSiteForm(request.POST)
+                FormsetObjet = OjetSiteFormset(prefix='forsmsetobjet', queryset=OBJETSITE.objects.none())
+                return render(request, 'conn/adminpage.html', {'FormObjet': FormObjet, 'FormsetObjet': FormsetObjet})
+        else:
+            return redirect('/')
+
+def parent(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin):
+            if request.method == 'POST':
+                type = request.POST['type']
+                parent = request.POST['parent']
+
+                try:
+                    enfants = []
+                    if(type == '1' and parent == '1'):
+                        enfants.append(OBJETSITE.objects.get(type='1', nom='Consolidé'))
+                    elif(parent == 'Vide' or parent == ''):
+                        enfants = []
+                    elif(parent == 'all'):
+                        if(type == '1'):
+                            enfants = OBJETSITE.objects.filter(parent__type='1', parent__nom="Consolidé")
+                        else:
+                            enfants = OBJETSITE.objects.filter(type=int(type))
+                    else:
+                        enfants = OBJETSITE.objects.filter(type=int(type), parent= parent)
+                except Exception:
+                    enfants = []
+                return render(request, 'conn/enfant.html', {'enfants': enfants})
+        else:
+            return redirect('/')
+
+def messagerieAdmin(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin):
+            if request.method == 'POST':
+                pass
+            else:
+                liste_messagerie = EtapeProbleme.objects.filter(active=True)
+                return render(request, 'conn/messagerie.html', {"liste_messagerie": liste_messagerie})
+
+def informationmessage(request, pk):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        if request.method == 'POST':
+            choix = request.POST['choix']
+            try:
+                etape = EtapeProbleme.objects.get(messagerie__id=int(pk), active=True)
+                etape.active = False
+                etape.save()
+            except Exception:
+                pass
+            etape = EtapeProbleme.objects.create(messagerie=Messagerie.objects.get(id=int(pk)), type = choix)
+            etape.save()
+            return HttpResponse('Success')
+        else:
+            historiquemessagerie = EtapeProbleme.objects.filter(messagerie_id=int(pk))
+            messagerie = historiquemessagerie.first().messagerie
+            return render(request, 'conn/information.html', {'historiquemessagerie':historiquemessagerie,
+                                                         'messagerie': messagerie})
+
+def homerap(request, pk):
+    if (request.user.id is None):
+        return redirect('/rapport/'+str(pk))
+    else:
+        global lien, idrap
+        lien = OBJETSITE.objects.get(id=int(pk)).lien
+        idrap = int(pk)
+        return redirect('/')
+
+
+def homepage(request, pk):
+    if (request.user.id is None):
+        return redirect('/page/'+str(pk))
+    else:
+        global page
+        page = pk
+        return redirect('/')
+
+def acceuilpage(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        return render(request, 'conn/accueil.html')
+
+def ajoutimagemessagerie(request):
+    fichier = request.FILES['file']
+    id_messagerie = request.POST['id_messagerie']
+    try:
+        message = Messagerie.objects.get(id= int(id_messagerie))
+        message.image = fichier
+        message.save()
+    except Exception:
+        pass
+    return HttpResponse('Success')
+
+def recherchemessagerieelem(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        if request.method == 'POST':
+            profile = PROFILE.objects.get(utilisateur=request.user)
+            if (profile.admin):
+                designation = request.POST['designation']
+                type = request.POST['type']
+                date = request.POST['date']
+
+                newliste = EtapeProbleme.objects.filter(active=True)
+                if(date != ''):
+                    date = date.split("-")
+                    etapes = EtapeProbleme.objects.filter(date__day=int(date[2]),
+                                                      date__month=int(date[1]),
+                                                      date__year=int(date[0])).values('messagerie').distinct()
+                    newliste = newliste.filter(messagerie__in=etapes)
+
+                if(designation != ''):
+
+                    newliste = newliste.filter(Q(messagerie__designation__icontains=designation) | Q(messagerie__sujet__icontains=designation))
+
+                if(type != '0'):
+                    newliste = newliste.filter(type=type)
+                listeID = []
+                listeDesignation = []
+                listeSujet = []
+                listeEtat = []
+                listeDate = []
+                listeEtatid = []
+
+                for elem in newliste:
+                    listeID.append(elem.messagerie.id)
+                    listeDesignation.append(elem.messagerie.designation)
+                    listeSujet.append(elem.messagerie.sujet)
+                    listeEtatid.append(elem.type())
+                    listeEtat.append(elem.get_type_display())
+                    listeDate.append(elem.messagerie.date.strftime("%Y/%m/%d"))
+                dict = {
+                    'id':listeID,
+                    'designation':listeDesignation,
+                    'sujet':listeSujet,
+                    'etat':listeEtat,
+                    'etatid':listeEtatid,
+                    'dates':listeDate,
+                }
+
+                return HttpResponse(json.dumps(dict, cls=DjangoJSONEncoder))
+            else:
+                pass
+                return HttpResponse('Success')
+
+def adminauth(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin):
+
+            if request.method == 'POST':
+                return HttpResponse('Success')
+            else:
+                authform = AutorisationForm(request.POST)
+                profiles = PROFILE.objects.all().order_by('-id')[:100]
+                dernierutilisateur= PROFILE.objects.all().order_by('-id')[:10]
+                liste_util = []
+                for pro in dernierutilisateur:
+                    try:
+                        societe = pro.societe.nom
+                    except:
+                        societe = 'Inconnu'
+                    if(pro.id_objet.order_by('type').first() == None):
+                        auto = 'aucun'
+                    else:
+                        auto = pro.id_objet.order_by('type').first().get_type_display()
+                    liste_util.append({'user': pro.utilisateur.first_name,
+                                       'auto':auto,
+                                       "ad2000": pro.utilisateur.username,
+                                       "email": pro.utilisateur.email,
+                                       "societe":societe,
+                                       'id': pro.utilisateur.id})
+                tovalidate = Autorisation.objects.filter(Q(validite=False, refuser=False)| Q(validite=True, datesuppr__isnull=False, active=True))
+
+
+                listefinal = []
+                for elem in tovalidate:
+                    if(elem.validite):
+                        validate = 'Suppression'
+                    else:
+                        validate = 'Ajout'
+                    listefinal.append({'obj': elem, 'parent': gettypeancetre(elem.objetsite).nom, 'valide': validate})
+
+
+
+                return render(request, 'conn/AutorisationAdmin.html', {'listefinal':listefinal,
+                                                                       'authform': authform, 'profiles': profiles,
+                                                                       'liste_util': liste_util, 'tovalidate':tovalidate})
+        else:
+            return redirect('/')
+
+def gettypeancetre(elem):
+    if(elem.type in ['1', '2', '3']):
+        return elem
+    else:
+        return gettypeancetre(elem.parent)
+
+def loadauthuser(request, pk):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin):
+            if request.method == 'POST':
+                return HttpResponse('Success')
+            else:
+                utilisateur = User.objects.get(id= int(pk))
+                profileuser = PROFILE.objects.get(utilisateur=utilisateur)
+
+                if(profileuser.type_autorisation == 'TC'):
+                    element = 'Consolidé'
+                else:
+                    try:
+                        profileuser.id_objet.through.objects.filter(Q(type='2')|Q())
+                    except Exception:
+                        pass
+
+                return render(request, 'conn/authinfo.html', {'profileuser':profileuser,})
+        else:
+            return redirect('/')
+
+def suppressionauth(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin or profile.droitauth):
+            if request.method == 'POST':
+                idobj = request.POST['idobj']
+                profilid = request.POST['profilid']
+                try:
+                    """auth = Autorisation.objects.get(id=int(idauth))
+                    liste = [auth.objetsite]
+                    get_all_childs(auth.objetsite, liste)
+                    for elem in liste:
+                        requests.post("http://10.10.10.64:8585/autorisationrap/?type=supprimer&lien="+elem.liensup+"&utilisateur="+auth.user.username)
+
+                    auth.active = False
+                    auth.userdel = profile.utilisateur.username
+                    auth.datesuppr = datetime.datetime.now()
+                    auth.save()
+
+                    profileuser = PROFILE.objects.get(utilisateur = auth.user)
+                    profileuser.id_objet.remove(auth.objetsite)"""
+                    objet = OBJETSITE.objects.get(id=int(idobj))
+                    profileuser = PROFILE.objects.get(id=int(profilid))
+
+                    autorisation = Autorisation.objects.get(objetsite=objet, user=profileuser.utilisateur, active=True, validite=True, userdel__isnull=True)
+                    autorisation.userdel = profile.utilisateur.username
+                    autorisation.datesuppr = datetime.datetime.now()
+                    autorisation.save()
+                    return HttpResponse('Success')
+                except Exception:
+                    return HttpResponse('Error')
+
+            else:
+                return redirect('/')
+        else:
+            return redirect('/')
+
+def get_all_childs(elem, liste):
+    if(elem.type == "6"):
+        liste.append(elem)
+    else:
+        enfant = OBJETSITE.objects.filter(parent=elem)
+        for child in enfant:
+            liste.append(child)
+            get_all_childs(child, liste)
+
+        return liste
+
+def nouveauautuser(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin or profile.droitauth):
+            if request.method == 'POST':
+                idobjet = request.POST['idobjet']
+                users = request.POST.getlist('users[]')
+
+                objet = OBJETSITE.objects.get(id=int(idobjet))
+                for use in users:
+                    auto = Autorisation.objects.create(user=PROFILE.objects.get(id=int(use)).utilisateur, useradd=profile.utilisateur.first_name, objetsite=objet)
+                    auto.save()
+
+                return HttpResponse('Success')
+            else:
+                profiles = PROFILE.objects.all()
+                authtotal = OBJETSITE.objects.get(type=1, nom='Consolidé')
+                return render(request, 'conn/ajoutauth.html', {'profiles': profiles, 'authtotal': authtotal})
+        else:
+            return redirect('/')
+
+def getchilddir(elem, liste):
+    if(elem.type == '6'):
+        pass
+    else:
+        children = OBJETSITE.objects.filter(parent=elem)
+        for child in children:
+            if(child.type in ['4', '5']):
+                liste.append(child)
+                getchilddir(child, liste)
+        return liste
+
+def newparentchoixe(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin or profile.droitauth):
+            if request.method == 'POST':
+                type = request.POST['type']
+                niveau = request.POST['niveau']
+
+                try:
+                    enfants = []
+
+                    if(niveau == 'conso' and type == 'all'):
+                        enfants = OBJETSITE.objects.filter(type=1, nom="Consolidé")
+                    elif(niveau == 'conso' and type == 'dir'):
+                        getchilddir(OBJETSITE.objects.get(type=1, nom="Consolidé"), enfants)
+                    elif (niveau == 'conso'):
+                        enfants = OBJETSITE.objects.filter(type=6, parent__id=int(type))
+                    elif (niveau == 'pole' and type == 'all'):
+                        enfants = OBJETSITE.objects.filter(type=2)
+                    elif (type == 'dir'):
+                        getchilddir(OBJETSITE.objects.get(id= int(niveau)), enfants)
+                    elif (type == 'all'):
+                        enfants = OBJETSITE.objects.filter(type='3', parent__id=int(niveau))
+                    else:
+                        enfants = OBJETSITE.objects.filter(type=6, parent__id=int(type))
+
+                except Exception:
+                    enfants = []
+                return render(request, 'conn/enfant.html', {'enfants': enfants})
+        else:
+            return redirect('/')
+
+def parentfinal(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin or profile.droitauth):
+            if request.method == 'POST':
+                choix = request.POST['choix']
+                idparent = request.POST['idparent']
+                try:
+                    if choix == "1":
+                        enfants = OBJETSITE.objects.filter(type= 1, nom="Consolidé")
+                    elif choix == "2":
+                        enfants = []
+                        enfants = getchilddir(OBJETSITE.objects.get(type= 1, nom="Consolidé"), enfants)
+                    elif choix in ["3", "6", "9"]:
+                        enfants = OBJETSITE.objects.filter(type= 6, parent__id=int(idparent))
+                    elif choix == "4":
+                        enfants = OBJETSITE.objects.filter(type=2)
+                    elif choix == "5":
+                        enfants = []
+                        enfants = getchilddir(OBJETSITE.objects.get(id=int(idparent)), enfants)
+                    elif choix == "7":
+                        enfants = OBJETSITE.objects.filter(type=3, parent__id=int(idparent))
+                    elif choix == "8":
+                        enfants = []
+                        enfants = getchilddir(OBJETSITE.objects.get(id=int(idparent)), enfants)
+                    else:
+                        enfants = []
+                except Exception:
+                    enfants = []
+
+
+                return render(request, 'conn/enfant.html', {'enfants': enfants})
+        else:
+            return redirect('/')
+
+def adminelse(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.droitauth):
+            if request.method == 'POST':
+                return HttpResponse('Success')
+            else:
+                authform = AutorisationForm(request.POST)
+                profiles = PROFILE.objects.all().order_by('-id')[:100]
+                return render(request, 'conn/Autorisation.html', {'authform': authform, 'profiles': profiles})
+        else:
+            return redirect('/')
+
+def actionautorisation(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin):
+            idauth = request.POST['idauth']
+            action = request.POST['action']
+
+            auth  = Autorisation.objects.get(id=int(idauth))
+            #profileuser = PROFILE.objects.get(utilisateur=auth.user)
+            if(auth.objetsite.type == '1'):
+                liste = OBJETSITE.objects.all()
+            else:
+                liste = [auth.objetsite]
+                get_all_childs(auth.objetsite, liste)
+            if(action != 'refus'):
+                if(auth.validite == False):
+
+                    idnum = profile.id_objet.through.objects.latest('id').id
+                    for elem in liste:
+                        requests.post("http://10.10.10.64:8585/autorisationrap/?type=ajout&lien=" + elem.lienaut + "&utilisateur=" + auth.user.username)
+                        idnum = idnum + 1
+                        try:
+                            profile.id_objet.through.objects.create(id=idnum, profile_id=profile.id,objetsite_id=elem.id).save()
+                        except Exception:
+                            pass
+                    auth.validite = True
+                    auth.save()
+                else:
+                    for elem in liste:
+                        requests.post("http://10.10.10.64:8585/autorisationrap/?type=supprimer&lien=" + elem.liensup + "&utilisateur=" + auth.user.username)
+                        try:
+                            profile.id_objet.through.objects.get(profile_id=profile.id,objetsite_id=elem.id).delete()
+                        except Exception:
+                            pass
+                    auth.validite = True
+                    auth.save()
+            else:
+                auth.refuser = True
+                auth.userdel = None
+                auth.datesuppr = None
+                auth.save()
+
+            return HttpResponse("Success")
+        else:
+            return redirect('/')
+
+def getchildsofobjsite(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin or profile.droitauth):
+            if request.method == 'POST':
+                idobj = request.POST['idobj']
+                profileid = request.POST['profileid']
+                active = request.POST['active']
+
+                #profileuser = PROFILE.objects.get(utilisateur=int(profileid))
+                #liste_autorisation = Autorisation.objects.filter(user=profileuser.utilisateur)
+                try:
+                    if(idobj in ['Pole']):
+                        pass
+                    else:
+                        objets = OBJETSITE.objects.get(id=int(idobj))
+                        if(objets.nom == 'Consolidé'):
+                            objetsenfant = OBJETSITE.objects.filter(parent__id=int(idobj) or type == '2')
+                        else:
+                            objetsenfant = OBJETSITE.objects.filter(parent__id=int(idobj) or type == '2')
+                        listenom=[]
+                        listedesign=[]
+                        listeid=[]
+                        listetype=[]
+                        for obj in objetsenfant:
+                            listenom.append(obj.nom.replace(' ', '_'))
+                            listeid.append(obj.id)
+                            listedesign.append(obj.nom)
+                            listetype.append(obj.type)
+
+
+
+                    return HttpResponse(json.dumps({'listenom': listenom, 'listeid': listeid,
+                                                    'listedesign': listedesign, 'listetype':listetype}, cls=DjangoJSONEncoder))
+                except Exception:
+                    return HttpResponse('Error')
+
+            else:
+                return redirect('/')
+        else:
+            return redirect('/')
+
+def historiqueutil(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        print('coucou2')
+        if request.method == 'POST':
+            print('ici')
+            idhisto = request.POST['idhisto']
+            action = request.POST['action']
+
+            if(idhisto != ''):
+                histo = HISTORIQUELOGIN.objects.get(id=int(idhisto))
+                histo.temps = int((timezone.now() - histo.date).total_seconds())
+                histo.active = False
+                histo.save()
+
+            if(action.isdigit()):
+                resultat = newhysto(request.user.id, 'rapport', action)
+            else:
+                resultat = newhysto(request.user.id, 'page', action)
+
+            return HttpResponse(resultat)
+        else:
+            return redirect('/')
+
+def StatistiqueAdmin(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.admin):
+            if request.method == 'POST':
+                return HttpResponse('Success')
+            else:
+                dateaujourdui = datetime.datetime.now()
+                listeadmin = []
+                listeprofile = PROFILE.objects.filter(admin=True)
+
+                if (profile.utilisateur.username == 'omarhasnaoui'):
+                    for admin in listeprofile:
+                        listeadmin.append(admin.utilisateur.id)
+                    listhisto = HISTORIQUELOGIN.objects.filter(date__year=dateaujourdui.year,
+                                                               date__month=dateaujourdui.month,
+                                                               utilisateur=ContentType.objects.get(app_label='auth',
+                                                                                                   model='User'),
+                                                               utilisateurid__in=listeadmin
+                                                               )
+                else:
+                    for admin in listeprofile:
+                        if (admin.utilisateur.username not in ['omarhasnaoui']):
+                            listeadmin.append(admin.utilisateur.id)
+
+                    """listhisto = HISTORIQUELOGIN.objects.filter(date__year=dateaujourdui.year,
+                                                               date__month=dateaujourdui.month,
+                                                               utilisateur=ContentType.objects.get(app_label='auth',
+                                                                                                   model='User'),
+                                                               utilisateurid__in=listeadmin
+                                                               )"""
+
+                return render(request, 'conn/statistiqueadmin.html')
+        else:
+            return redirect('/')
+
+def loadurlbyid(request, pk):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        return render(request, 'conn/rapport.html')
+
+def slider(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        profile = PROFILE.objects.get(utilisateur=request.user)
+        if(profile.slider):
+            if(request.method == "POST"):
+                pass
+            else:
+                return render(request, 'conn/slider.html')
+        else:
+            return redirect('/')
+
+def verifierutilisateurfroit(request):
+    if (request.user.id is None):
+        return redirect('/')
+    else:
+        if (request.method == "POST"):
+            users = request.POST.getlist('listeid[]')
+            objet = OBJETSITE.objects.get(id= int(request.POST['objetid']))
+            listprofiles = PROFILE.objects.filter(id__in=users)
+
+            listeverification =[]
+            for profile in listprofiles:
+                auth = profile.id_objet.all()
+                if(objet in auth):
+                    listeverification.append(profile.utilisateur.first_name)
+            if(len(listeverification) == 0):
+                return HttpResponse('Success')
+            else:
+                return HttpResponse(', '.join(listeverification))
+        else:
+            return redirect('/')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="cont">
+                    {% if messagerie.image %}
+                        <div class="row">
+                            <div class="col" style="display: flex; justify-content: center; margin-bottom: 10px">
+                                <img style="width: 700px" src="/media/{{ messagerie.image.name }}">
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-3">Utilisateur :</div>
+                        <div class="col" style="overflow-wrap: break-word;">{{ messagerie.designation }}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">Sujet :</div>
+                        <div class="col-9" style="overflow-wrap: break-word;">{{ messagerie.sujet }}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">Problématique :</div>
+                        <div class="col-9" style="overflow-wrap: break-word;">{{ messagerie.probleme }}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">Lien :</div>
+                        <div class="col-9" style="overflow-wrap: break-word;"><a href="{{ messagerie.lien }}" target="_blank">{{ messagerie.lien }}</a></div>
+                    </div>
+
+
+                        <div class="row">
+                            {% for elem in historiquemessagerie  %}
+                                <div class="col-3">{{ elem.get_type_display }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            {% for elem in historiquemessagerie  %}
+                                <div class="col-3">{{ elem.date|date:"d/m/Y" }}</div>
+                            {% endfor %}
+                        </div>
+
+                </div>
+                {% for elem in historiquemessagerie  %}
+                    {% if forloop.last  %}
+                        {% if elem.type == '1' %}
+                        <div class="row d-flex justify-content-center">
+                            <div class="circle">
+                                <div class="fa fa-long-arrow-right next" onclick="changermessage('2','{{ messagerie.id }}')">Ok</div>
+                            </div>
+                        </div>
+                        {% elif elem.type == '2' %}
+                            <div class="row d-flex justify-content-center" id="buttonsend">
+                                <div class="circle">
+                                    <div class="fa fa-long-arrow-right next" onclick="changermessage('3','{{ messagerie.id }}')">Ok</div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}

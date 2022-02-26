@@ -1,0 +1,740 @@
+<style>
+    .container-fluid .fieldlabels {
+        color: #1c1d22 !important;
+        text-align: left
+    }
+
+    .container-fluid #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: #fff;
+        padding-left: 0;
+        margin-top: 30px
+    }
+
+    .container-fluid #progressbar li {
+        list-style-type: none;
+        font-size: 13px;
+        width: 33.33%;
+        float: left;
+        position: relative;
+        font-weight: 400
+    }
+
+    .container-fluid #progressbar #step1:before {
+        content: "1";
+        color: #fff
+    }
+
+    .container-fluid #progressbar #step2:before {
+        content: "2";
+        color: #fff
+    }
+
+    .container-fluid #progressbar #step3:before {
+        content: "3";
+        color: #fff
+    }
+
+
+    .container-fluid #progressbar li:before {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        display: block;
+        font-size: 20px;
+        background: #455A64;
+        border-radius: 50%;
+        margin: auto;
+        padding: 0px
+    }
+
+    .container-fluid #progressbar li:after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: #455A64;
+        position: absolute;
+        left: 0;
+        top: 21px;
+        z-index: -1
+    }
+
+    .container-fluid #progressbar li:last-child:after {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: absolute;
+    left: -50%
+}
+
+    .container-fluid #progressbar li:nth-child(2):after {
+        left: -50%
+    }
+
+    .container-fluid #progressbar li:first-child:after {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        position: absolute;
+        left: 50%
+    }
+
+    .container-fluid #progressbar li:last-child:after {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px
+    }
+
+    .container-fluid #progressbar li:first-child:after {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px
+    }
+
+    .container-fluid #progressbar li.active:before,
+    .container-fluid #progressbar li.active:after {
+        background: #a5cf4b
+    }
+
+    .container-fluid #progressbar li.actuelle:before,
+    .container-fluid li.actuelle:after {
+        background: #0099d5;
+    }
+
+    .container-fluid .card {
+        background-color: #f5f5f5;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        padding: 60px 40px 40px 40px;
+        z-index: 0;
+        display: none
+    }
+
+    .container-fluid .card.show {
+        display: block
+    }
+
+    .container-fluid .form-control-label {
+        font-size: 22px !important;
+        color: #fff;
+        letter-spacing: 1px
+    }
+
+    .container-fluid ::placeholder {
+        color: #fff;
+        opacity: 1;
+        font-weight: 300
+    }
+
+    .container-fluid :-ms-input-placeholder {
+        color: #fff;
+        font-weight: 300
+    }
+
+    .container-fluid ::-ms-input-placeholder {
+        color: #fff;
+        font-weight: 300
+    }
+
+    .container-fluid input,
+    .container-fluid textarea {
+        padding: 8px 15px 8px 15px;
+        border-radius: 0px !important;
+        margin-bottom: 25px;
+        margin-top: 2px;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        font-size: 18px !important;
+        font-weight: 300
+    }
+
+    .container-fluid input:focus,
+    .container-fluid textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border-bottom: 1px solid #9FA8DA;
+        outline-width: 0;
+        font-weight: 400
+    }
+
+
+
+    .container-fluid .circle {
+        position: relative
+    }
+
+    .container-fluid .fa-long-arrow-right {
+        color: #a5cf4b;
+        background-color: #fff;
+        padding: 12px;
+        margin: 5px;
+        border-radius: 50%;
+        border: 3px solid #a5cf4b;
+        position: absolute;
+        left: -28px;
+        top: 12px;
+        cursor: pointer
+    }
+
+    .container-fluid .fa-long-arrow-right:hover {
+        background-color: #f1f1f1
+    }
+
+    .container-fluid .fa-long-arrow-left {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        color: #fff;
+        cursor: pointer
+    }
+
+    .container-fluid .check-mark {
+        width: 180px;
+        height: 180px
+    }
+
+    .form-control-label{
+        color: #1c1d22 !important;
+        font-weight: 600;
+    }
+
+    .container-fluid .step0{
+        text-align: center;
+    }
+
+    .container-fluid .row{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .btnvalidateadd{
+        background: #a5cf4b;
+        color: white;
+        font-weight: bold;
+    }
+
+    .btnvalidateanul{
+        background: #c24157;
+        color: white;
+        font-weight: bold;
+    }
+
+</style>
+
+<div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <ul id="progressbar" class="text-center">
+                <li class="active step0 actuelle" id="step1">NOUVELLE AUTORISATION</li>
+                <li class="step0" id="step2">CHOIX UTILISATEUR</li>
+                <li class="step0" id="step3">CONFIRMATION</li>
+            </ul>
+            <div class="card b-0 show" id="etape1" style="padding-top: 0">
+                <div class="row m-b-2">
+                    <div class="col d-none d-sm-inline"><hr></div>
+                    <div class="col">
+                        NOUVELLE AUTORISATION
+                        <button type="button" class="close d-block d-sm-inline d-xs-inline  d-md-none d-lg-none" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="col d-none d-sm-inline"><hr></div>
+
+                </div>
+                <!--<div class="row" style="background: #a5cf4b">
+                    <div class="col-xs-9 col-sm-9 col-md-10 col-xl-10">
+                        <div class="row" style="background: #bd2130">
+                            <div class="col"><hr></div>
+                            <div class="col">NOUVELLE AUTORISATION</div>
+                            <div class="col"><hr></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-1 col-xl-1">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                </div>-->
+                <div class="row justify-content-center" style="margin-bottom: 50px;">
+                    <div class="col-lg-10 col-md-11">
+                        <label class="form-control-label" >Selectionnez les rapports a autorisé:</label>
+                        <div class="row champtype">
+                            <select name="type" class="form-control" onchange="RaffraichirChoixtype(this.value)" id="id_type">
+                                <option value="1" selected>Consolidé</option>
+                                <option value="2">Pôle</option>
+                                <option value="3">Société</option>
+                                <option value="4">Direction/Sous-direction</option>
+                                <option value="5">Rapport</option>
+                            </select>
+                        </div>
+                        <div class="row champparent">
+                            <select name="parent" class="form-control" id="id_parent"></select>
+                        </div>
+                        <div class="divinformation2 text-center" ></div>
+                    </div>
+                </div>
+                <div class="fixed-bottom text-center"  style="bottom: 12%;">
+                    <button class="btn btnvalidateadd next" id="next1" onclick="validate1()">Suivant</button>
+                </div>
+            </div>
+            <div class="card b-0" id="etape2" style="padding-top: 0">
+                <div class="row m-b-2">
+                    <div class="col d-none d-sm-inline"><hr></div>
+                    <div class="col">
+                        CHOIX UTILISATEUR(S)
+                        <button type="button" class="close d-block d-sm-inline d-xs-inline  d-md-none d-lg-none" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="col d-none d-sm-inline"><hr></div>
+
+                </div>
+                <div class="row justify-content-center"  style="margin-bottom: 50px;">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                        <label class="form-control-label" >Selectionnez un ou plusieurs utilisateurs: </label>
+                        <select style="width: 100%" class="selectuserpicker form-control" id="selectusers" multiple data-live-search="true">
+                            {% for pro in profiles %}
+                                <option value="{{ pro.id }}">{{ pro.utilisateur.first_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="divinformation text-center" ></div>
+                    </div>
+                </div>
+                <div class="fixed-bottom text-center"  style="bottom: 12%">
+                    <button class="btn btnvalidateadd next" id="next2" onclick="validate2()">Suivant</button>
+                </div>
+            </div>
+            <div class="card b-0" id="etape3" style="padding-top: 0">
+                <div class="row m-b-2">
+                    <div class="col d-none d-sm-inline"><hr></div>
+                    <div class="col">
+                        CONFIRMATION
+                        <button type="button" class="close d-block d-sm-inline d-xs-inline  d-md-none d-lg-none" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="col d-none d-sm-inline"><hr></div>
+                </div>
+                <div class="row d-flex justify-content-center text-center">
+                    <div class="confirm"  style="margin-bottom: 100px;">
+                        <h4 class="mb-2">En confirmant, votre demande sera envoyé à l'equipe BI.</h4>
+                        <h8 id="finallab"></h8>
+                    </div>
+                </div>
+                <div class="fixed-bottom text-center"  style="bottom: 10%">
+                    <button class="btn btnvalidateanul next" data-dismiss="modal">Annuler</button>
+                    <button class="btn btnvalidateadd next" onclick="envoidemande()">Valider</button>
+                    <p></p>
+                    <p><small>*Les autorisations serons attribuer aprés la validation de votre ticket.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $selectuserpicker = $('.selectuserpicker');
+    $selectniveau = $('.selectniveau');
+    $selecttype = $('.selecttype');
+    $enfantchoix = $('.enfantchoix');
+    $finallab = $('#finallab');
+    $selectusers = $('#selectusers');
+    $etape1 = $('#etape1');
+    $etape2 = $('#etape2');
+    $etape3 = $('#etape3');
+    $divinformation = $('.divinformation');
+    $divinformation2 = $('.divinformation2');
+    $selectuserpicker.select2();
+    $id_parent = $('#id_parent');
+    $champtype = $('.champtype');
+
+    function validate2() {
+        if($selectusers.val().length > 0){
+            liste= [];
+            listeid=[];
+            $selectusers.find('option:selected').each(function () {
+                liste.push($(this).text());
+                listeid.push($(this).val());
+            });
+            $.ajax({
+                url: 'verifierutilauth',
+                data: {
+                    'listeid[]': listeid,
+                    'objetid': $id_parent.find('option:selected').val(),
+                    csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+                },
+                type: 'post',
+                success: function (data) {
+                    if(data === "Success"){
+                        $('#step2').removeClass("actuelle");
+                        $('#step3').addClass("active").addClass("actuelle");
+                        $etape2.hide();
+                        $etape3.show();
+                        if(liste.length === 1) textauth = textauth +"<br> a l'utilisateur :<br>"+liste.toString();
+                        else textauth = textauth +"<br> aux utilisateurs : <br>"+liste.toString();
+                        $finallab.html(textauth);
+
+                        window.location.href = window.document.location.origin + "/cbi/page/authadmin";
+
+                    }else{
+                        nombre = (data.split(",").length - 1);
+                        if(nombre > 0){
+                            $divinformation.html("<h7 style='color: #c24157;'>Les utilidateurs: "+data+" ont deja cette autorisation!</h7>")
+                        }else{
+                            $divinformation.html("<h7 style='color: #c24157;'>L'utilidateur: "+data+" a deja cette autorisation!</h7>")
+                        }
+                    }
+                },
+            });
+        }
+        else{
+            $divinformation.html('<h7 style="color: #c24157;">Vous devez au moins selectionnez un utilisateur !</h7>')
+        }
+    }
+
+    function validate1() {
+        text = "aucun element n'existe a ce niveau!";
+        if($id_parent.find('option:selected').length > 0){
+            $('#step1').removeClass("actuelle");
+            $('#step2').addClass("active").addClass("actuelle");
+            $etape1.hide();
+            $etape2.show();
+
+            type = $('#id_type').val();
+            try{
+                niveau = $selectniveau.val();
+            }catch (e) {
+            }
+
+
+            textauth = "Vous vous appretez a donner l'autorisation suivante: <br>";
+            switch (type) {
+                case '1':
+                    textauth = textauth+"le consolidé en intégralité";
+                    break;
+                case '2':
+                    textauth = textauth+"au "+$id_parent.find('option:selected').text()+" en intégralité";
+                    break;
+                case '3':
+                    textauth = textauth+"a la société "+$id_parent.find('option:selected').text()+" en intégralité";
+                    break;
+                case '4':
+                    switch (niveau) {
+                        case '1':
+                            textauth = textauth+"la "+$id_parent.find('option:selected').text()+" du consolidé";
+                            break;
+                        case '2':
+                            textauth = textauth+"la "+$id_parent.find('option:selected').text()+" du "+$selectpole;
+                            break;
+                        case '3':
+                            textauth = textauth+"la "+$id_parent.find('option:selected').text()+" du "+$selectsociete;
+                            break;
+                        default:
+                    }
+                    break;
+                case '5':
+                    switch (niveau) {
+                        case '1':
+                            textauth = textauth+"le rapport "+$id_parent.find('option:selected').text()+" du consolidé";
+                            break;
+                        case '2':
+                            textauth = textauth+"le rapport "+$id_parent.find('option:selected').text()+" du "+$selectpole;
+                            break;
+                        case '3':
+                            textauth = textauth+"le rapport "+$id_parent.find('option:selected').text()+" du "+$selectsociete;
+                            break;
+                        default:
+                    }
+                    break;
+                default:
+            }
+        }
+        else $divinformation2.html('<h7 style="color: #c24157;">'+text+'</h7>')
+    }
+
+
+
+
+    setTimeout(function(){chargementelems('1', '', $id_parent);}, 100);
+    function RaffraichirChoixtype(type) {
+        type = type.toString();
+        switch (type) {
+            case "1":
+                if ($( "#champniveaux" ).length ) {
+                    $( "#champniveaux" ).remove()
+                }
+                if ($( "#champpole" ).length ) {
+                    $( "#champpole" ).remove();
+                }
+                if ($( "#champsociete" ).length ) {
+                    $( "#champsociete" ).remove();
+                }
+                if ($( "#champdirection" ).length ) {
+                    $( "#champdirection" ).remove();
+                }
+                rechargenum = 0;
+                chargementelems('1', '', $id_parent);
+                break;
+            case "2":
+                if ($( "#champpole" ).length ) {
+                    $( "#champpole" ).remove();
+                }
+                if ($( "#champsociete" ).length ) {
+                    $( "#champsociete" ).remove();
+                }
+                if ($( "#champniveaux" ).length ) {
+                    $( "#champniveaux" ).remove()
+                }
+                if ($( "#champdirection" ).length ) {
+                    $( "#champdirection" ).remove();
+                }
+                rechargenum = 0;
+                chargementelems('4', '', $id_parent);
+                break;
+            case "3":
+                if ($( "#champdirection" ).length ) {
+                    $( "#champdirection" ).remove();
+                }
+                if ($( "#champniveaux" ).length ) {
+                    $( "#champniveaux" ).remove()
+                }
+                if ($( "#champsociete" ).length ) {
+                    $( "#champsociete" ).remove();
+                }
+                rechargenum = 1;
+                if (!$( "#champpole" ).length ) {
+                    $champtype.after('<div class="row champpole" id="champpole"><select class="form-control" id="selectpole" onchange="rechargerelem(1)"></select></div>')
+                }
+                $selectpole = $('#selectpole');
+                chargementelems('4', '', $selectpole);
+                setTimeout(function(){chargementelems('7', $selectpole.val(), $id_parent);}, 200);
+                break;
+            case "4":
+                if (!$( "#champniveaux" ).length ) {
+                    $champtype.after('<div class="row champniveaux" id="champniveaux"><select class="form-control" id="selectniveau" onchange="RaffraichirChoixtype(4)">' +
+                        '<option value="1">Consolidé</option>' +
+                        '<option value="2">Pole</option><option value="3">Société</option></select></div>')
+                }
+                niveau = $("#selectniveau").val();
+                switch (niveau) {
+                    case "1":
+                        if ($( "#champpole" ).length ) {
+                            $( "#champpole" ).remove();
+                        }
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        if ($( "#champdirection" ).length ) {
+                            $( "#champdirection" ).remove();
+                        }
+                        rechargenum = 1;
+                        chargementelems('2', '', $id_parent);
+                        break;
+                    case "2":
+                        if ($( "#champpole" ).length ) {
+                            $( "#champpole" ).remove();
+                        }
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        if ($( "#champdirection" ).length ) {
+                    $( "#champdirection" ).remove();
+                }
+                        rechargenum = 2;
+                        if (!$( "#champpole" ).length ) {
+                            $('#champniveaux').after('<div class="row champpole" id="champpole"><select class="form-control" id="selectpole" onchange="rechargerelem(1)"></select></div>')
+                        }
+                        $selectpole = $('#selectpole');
+                        chargementelems('4', '', $selectpole);
+                        setTimeout(function(){chargementelems('5', $selectpole.val(), $id_parent);}, 200);
+                        break;
+                    case "3":
+                        console.log("je suis ici en ce moment");
+                        if ($( "#champdirection" ).length ) {
+                            $( "#champdirection" ).remove();
+                        }
+                        rechargenum = 3;
+                        if (!$( "#champpole" ).length ) {
+                            $('#champniveaux').after('<div class="row champpole" id="champpole"><select class="form-control" id="selectpole" onchange="rechargerelem(1)"></select></div>')
+                        }
+                        if (!$( "#champsociete" ).length ) {
+                            $('#champpole').after('<div class="row champsociete" id="champsociete"><select class="form-control" id="selectsociete" onchange="rechargerelem(2)"></select></div>')
+                        }
+                        $selectpole = $( "#selectpole" );
+                        $selectsociete = $( "#selectsociete" );
+
+                        chargementelems('4', '', $selectpole);
+                        setTimeout(function(){
+                            chargementelems('7', $selectpole.val(), $selectsociete);
+                            setTimeout(function(){
+                                chargementelems('8', $selectsociete.val(), $id_parent);
+                            }, 200);
+                        }, 200);
+                        break;
+                    default:
+                }
+                break;
+            case "5":
+                if (!$( "#champniveaux" ).length ) {
+                    $champtype.after('<div class="row champniveaux" id="champniveaux"><select class="form-control" id="selectniveau" onchange="RaffraichirChoixtype(5)"><option value="1">Consolidé</option>' +
+                        '<option value="2">Pole</option><option value="3">Société</option></select></div>')
+                }
+                niveau = $("#selectniveau").val();
+                switch (niveau) {
+                    case "1":
+                        if ($( "#champpole" ).length ) {
+                            $( "#champpole" ).remove();
+                        }
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        if (!$( "#champdirection" ).length ) {
+                            $('#champniveaux').after('<div class="row champdirection" id="champdirection"><select class="form-control" id="selectdirection" onchange="rechargerelem(3)"></select></div>')
+                        }
+                        $selectdirection = $('#selectdirection');
+                        rechargenum = 4;
+                        chargementelems('2', '', $selectdirection);
+                        setTimeout(function(){
+                            chargementelems('3', $selectdirection.val() , $id_parent);
+                        }, 200);
+
+                        break;
+                    case "2":
+                        if ($( "#champsociete" ).length ) {
+                            $( "#champsociete" ).remove();
+                        }
+                        rechargenum = 5;
+                        if (!$( "#champpole" ).length ) {
+                            $('#champniveaux').after('<div class="row champpole" id="champpole"><select class="form-control" id="selectpole" onchange="rechargerelem(1)"></select></div>')
+                        }
+                        if (!$( "#champdirection" ).length ) {
+                            $('#champpole').after('<div class="row champdirection" id="champdirection"><select class="form-control" id="selectdirection" onchange="rechargerelem(3)">' +
+                                '</select></div>')
+                        }
+
+                        $selectdirection = $('#selectdirection');
+                        $selectpole = $( "#selectpole" );
+
+                        chargementelems('4', '', $selectpole);
+                        setTimeout(function(){
+                            chargementelems('5', $selectpole.val(), $selectdirection);
+                            setTimeout(function(){
+                                console.log($selectdirection.val());
+                                chargementelems('6', $selectdirection.val(), $id_parent);
+                            }, 200);
+                        }, 200);
+                        break;
+                    case "3":
+                        console.log("je suis la");
+                        rechargenum = 6;
+                        if (!$( "#champpole" ).length ) {
+                            $('#champniveaux').after('<div class="row champpole" id="champpole"><select class="form-control" id="selectpole" onchange="rechargerelem(1)"></select></div>')
+                        }
+                        $selectpole = $( "#selectpole" );
+                        if (!$( "#champsociete" ).length ) {
+                            $('#champpole').after('<div class="row champsociete" id="champsociete"><select class="form-control" id="selectsociete" onchange="rechargerelem(2)"></select></div>')
+                        }
+                        if (!$( "#champdirection" ).length ) {
+                            $('#champsociete').after('<div class="row champdirection" id="champdirection"><select class="form-control" id="selectdirection" onchange="rechargerelem(3)">' +
+                                '</select></div>')
+                        }
+
+                        $selectdirection = $('#selectdirection');
+                        $selectsociete = $('#selectsociete');
+
+                        chargementelems('4', '', $selectpole);
+                        setTimeout(function(){
+                            chargementelems('7', $selectpole.val(), $selectsociete);
+                            setTimeout(function(){
+                                chargementelems('8', $selectsociete.val(), $selectdirection);
+                                setTimeout(function(){
+                                    chargementelems('9', $selectdirection.val(), $id_parent);
+                                }, 200);
+                            }, 200);
+                        }, 200);
+                        break;
+                    default:
+                }
+                break;
+            default:
+        }
+    }
+
+    function chargementelems(choix, idparent, $select) {
+        $.ajax({
+            type:'POST',
+            url :'parentf',
+            data : {
+                choix: choix,
+                idparent: idparent,
+                csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+            },
+            success : function(resultat){
+                $select.html(resultat);
+            }
+        });
+    }
+
+    function rechargerelem(num) {
+        console.log(num+" "+rechargenum);
+        switch (rechargenum) {
+            case 1:
+                chargementelems('7', $selectpole.val(), $id_parent);
+                break;
+            case 2:
+                chargementelems('5', $selectpole.val(), $id_parent);
+                break;
+            case 3:
+                if(num === 1){
+                    chargementelems('7', $selectpole.val(), $selectsociete);
+                    setTimeout(function(){chargementelems('8', $selectsociete.val(), $id_parent);}, 200);
+                }
+                else if(num === 2){
+                    chargementelems('8', $selectsociete.val(), $id_parent);
+                }
+                break;
+            case 4:
+                chargementelems('3', $selectdirection.val(), $id_parent);
+                break;
+            case 5:
+                if(num === 1){
+                    chargementelems('5', $selectpole.val(), $selectdirection);
+                    setTimeout(function(){chargementelems('6', $selectdirection.val(), $id_parent);}, 200);
+                }
+                else if(num === 3){
+                    chargementelems('6', $selectdirection.val(), $id_parent);
+                }
+                break;
+            case 6:
+                if(num === 1){
+                    chargementelems('7', $selectpole.val(), $selectsociete);
+                    setTimeout(function(){
+                        chargementelems('8', $selectsociete.val(), $selectdirection);
+                        setTimeout(function(){
+                            chargementelems('9', $selectdirection.val(), $id_parent);
+                        }, 200);
+                    }, 200);
+                }
+                else if(num === 2){
+                    chargementelems('8', $selectsociete.val(), $selectdirection);
+                    setTimeout(function(){chargementelems('9', $selectdirection.val(), $id_parent);}, 200);
+                }
+                else if(num === 3){
+                    chargementelems('9', $selectdirection.val(), $id_parent)
+                }
+                break;
+            default:
+        }
+    }
+
+    function envoidemande() {
+        liste= [];
+        $selectusers.find('option:selected').each(function () {
+            liste.push($(this).val());
+        });
+
+        $.ajax({
+            type:'POST',
+            url :'newauth',
+            data : {
+                "users[]": liste,
+                idobjet: $id_parent.val(),
+                csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+            },
+            success : function(resultat){
+                $addauthpopup.fadeIn(1000);
+            }
+        });
+    }
+</script>

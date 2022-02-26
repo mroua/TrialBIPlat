@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html  translate="no" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CBI</title>
+	<meta name="description" content="CBI new website." />
+	<meta name="author" content="MRoua" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+	<!-- food icons -->
+	<link rel="stylesheet" type="text/css" href="{% static 'site/css/organicfoodicons.css' %}" />
+	<!-- demo styles -->
+	<link rel="stylesheet" type="text/css" href="{% static 'site/css/demo.css' %}" />
+	<!-- menu styles -->
+	<link rel="stylesheet" type="text/css" href="{% static 'site/css/component.css' %}" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+
+	<link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}"/>
+
+	<script src="{% static 'site/js/modernizr-custom.js' %}"></script>
+</head>
+
+<body>
+    <div class="loadingpage">
+        <img class="imgloadingwhite" src="{% static 'site/img/loadingwhite.svg' %}">
+    </div>
+
+    <button class="btnpopupmessage" data-toggle="modal" data-target="#messageriepopup" style="outline:none;" title="Création de tickets">
+        <img src="{% static 'login/newint/Message Icon.svg' %}">
+    </button>
+    <button class="btnpopupfullscreen" style="outline:none;" onclick="menutoggle()" title="Plein écran">
+        <img src="{% static 'login/newint/Full Screen Icon.svg' %}">
+    </button>
+
+
+
+    <script src="{% static 'site/js/classie.js' %}"></script>
+	<script src="{% static 'site/js/dummydata.js' %}"></script>
+	<script src="{% static 'site/js/main.js' %}"></script>
+
+	<script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    {% block contenue %}
+
+    {% endblock %}
+
+    <script>
+        $loadingpage = $('.loadingpage');
+        visible = 1;
+        function menutoggle() {
+            if(visible === 1){
+                $('.dummy-logo').animate({width: 0},{queue: false });
+                $('.contenaire_menu').animate({width: 0},{queue: false });
+                $('.menu').animate({width: 0});
+                $('.content').animate({'margin': '0 0 0 0'});
+                $('.menu__breadcrumbs').css('display', 'none');
+
+                visible = 0;
+            }
+            else{
+                $('.contenaire_menu').animate({width: 300});
+                $('.dummy-logo').animate({width: 300});
+                $('.menu').animate({width: 300});
+                $('.menu__breadcrumbs').css('display', 'block');
+                $('.content').animate({'margin': '0 0 0 300px'});
+                visible = 1;
+            }
+            try{
+                currentlink =  $("#iframerapport").attr("src");
+                if(currentlink.includes('&rc:Zoom=Page+Width')){
+                    $("#iframerapport").attr("src", currentlink);
+                }
+            }catch (e) {
+
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

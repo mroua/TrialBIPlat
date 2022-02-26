@@ -1,0 +1,170 @@
+<style>
+    .contparent{
+        border: 1px solid #000000;
+        padding:10px
+    }
+
+    .nomutilisateur, .titrepageautouser{
+        font-weight: bold;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-header" style="border-bottom: none">
+            <div class="col-4"><hr></div>
+            <div class="col-4 text-center titrepageautouser">Autorisation {{ profileuser.utilisateur.username }}</div>
+            <div class="col-4"><hr></div>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -10px;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+    <div class="modal-body">
+        <div class="row d-flex justify-content-center">
+            <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                <img id="photo_user" src="data:image/jpeg;base64,{{ profileuser.photo }}" style="display: block; width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(0,0,0,.125)">
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 text-center nomutilisateur">
+                {{ profileuser.utilisateur.first_name }}
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 text-center">
+                {{ profileuser.poste }}
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 text-center">
+                {{ profileuser.societe.nom }}
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-9 divmessgaerieauthdel">
+
+        </div>
+    </div>
+    <div class="divactive" style="padding: 10px;">
+        {% for elem in listeretour %}
+            <div class="card" style="margin: 5px">
+                <div class="row p-2" id="parent_{{ elem.id }}">
+                    <div class="col-12 col-sm-12 col-md-9 col-lg-9" onclick="afficherenfants(this, '{{ elem.id }}', {{ profileuser.id }})">{{ elem.nom }}</div>
+                    <div class="col d-none d-sm-inline" style="border-right: 1px solid #1c1d22"></div>
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-left" style="color: #c24157; cursor: pointer;" onclick="supprimerauth('{{ elem.id }}', {{ profileuser.id }}, this)">Supprimer</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    $divmessgaerieauthdel= $('.divmessgaerieauthdel');
+    function supprimerauth(idobj, profilid, elem) {
+        $.ajax({
+            url: 'delauth',
+            data: {
+                'idobj': idobj,
+                'profilid': profilid,
+                csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+            },
+            type: 'post',
+            success: function (data) {
+                $divmessgaerieauthdel.html('');
+                if(data === "Success"){
+                    $divmessgaerieauthdel.append('<div class="alert alert-danger alert-dismissible fade show" style="background:#a5cf4b; color:#f2f2f2" role="alert">\n' +
+                                        '  <strong>Succée!</strong> Votre demande a été envoyer.\n' +
+                                        '</div>')
+                }else{
+                    $divmessgaerieauthdel.append('<div class="alert alert-danger alert-dismissible fade show" style="background:#c24157; color:#f2f2f2" role="alert">\n' +
+                                        '  Votre demande est en traitement, veuillez attendre la réponce de la CBI.\n' +
+                                        '</div>');
+                }
+                elem.parentNode.parentNode.remove();
+            },
+        });
+    }
+    function afficherenfants(elem, idobj, profileid, type) {
+        if(type !== 6) {
+            parent = elem.parentNode.id;
+            enfant = parent.replace("parent", "enfant");
+            if ($('#' + enfant).length) {
+                elem = $('#' + enfant);
+                //elem.toggle();
+                elem.slideToggle( "slow" );
+            } else {
+                $('#' + parent).after('<div class="card"  style="margin:5px" id="' + enfant + '"></div>');
+                $.ajax({
+                    url: 'getchilds',
+                    data: {
+                        'idobj': idobj,
+                        'profileid': profileid,
+                        csrfmiddlewaretoken: $('input[name= csrfmiddlewaretoken]').val()
+                    },
+                    type: 'post',
+                    success: function (data) {
+                        donnee = JSON.parse(data);
+
+                        if (donnee.length === 0) {
+                            $('#' + enfant).append('<div class="row" style="margin:5px">' +
+                                '<div class="col">cette element est vide</div></div>')
+                        } else {
+                            for (i = 0; i < donnee.length; i++) {
+                                $('#' + enfant).append('<div class="card" style="margin:5px">\n' +
+                                    '                <div class="row p-2" id="parent_' + donnee[i]['id'] + '" >\n' +
+                                    '                <div class="col-12 col-sm-12 col-md-9 col-lg-9" onclick="afficherenfants(this, ' + donnee[i]['id'] + ', ' + profileid + ', ' + donnee[i]['type'] + ')">' + donnee[i]['nom'] + '</div>'+
+                                    '                <div class="col d-none d-sm-inline" style="border-right: 1px solid #1c1d22"></div>'+
+                                    '                <div class="col-12 col-sm-12 col-md-2 col-lg-2" style="color: #c24157; cursor: pointer;" '+
+                                    '                onclick="supprimerauth(' + donnee[i]['id'] + ', ' + profileid + ', this)">Supprimer</div> '+
+                                    '                </div>\n' +
+                                    '            </div>')
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+
+        /*if(type !== 6){
+            divparent = elem.parentNode.parentNode.id;
+            divcont = divparent.replace("div", "contenaire_enfant");
+            if($('#'+divcont).length){
+                elem = $('#'+divcont);
+                elem.toggle();
+
+            }
+            else{
+                $('#'+divparent).after('<div class="contparent" id="'+divcont+'"></div>');
+                $.ajax({
+                    url: 'getchilds',
+                    data: {
+                        'idobj': idobj,
+                        'profileid': profileid,
+                        csrfmiddlewaretoken:$('input[name= csrfmiddlewaretoken]').val()
+                    },
+                    type: 'post',
+                    success: function (data) {
+
+                        donnee = JSON.parse(data);
+                        if(donnee["listenom"].length === 0){
+                            $('#'+divcont).append('<div class="row text_center">cette element est vide</div>')
+                        }else{
+
+                            for(i = 0; i<donnee["listenom"].length; i++){
+                                $('#'+divcont).append('<div class="card text-white bg-success mb-3" id="div_'+donnee["listenom"][i]+'_'+donnee["listeid"][i]+'" style="padding: 10px;">' +
+                                    '<div class="row">' +
+                                    '<div class="col-10" style="cursor: pointer" onclick="afficherenfants(this,' +
+                                    ''+donnee["listeid"][i]+','+profileid+','+active+', '+donnee["listetype"][i]+')">'+donnee["listenom"][i]+'</div>' +
+                                    '<div class="col-2" style="cursor: pointer" onclick="supprimerauth('+donnee["listeid"][i]+', '+profileid+')">Supprimer</div></div></div>')
+                            }
+
+                        }
+                    },
+                });
+            }
+        }*/
+    }
+
+
+</script>

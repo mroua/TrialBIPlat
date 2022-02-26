@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1549.776" height="678.513" viewBox="0 0 1549.776 678.513">
+  <defs>
+    <filter id="Ellipse_174" x="818.559" y="49.975" width="196.7" height="196.7" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_175" x="818.99" y="200.604" width="59.061" height="52.052" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_268" x="926.93" y="190.493" width="66.498" height="58.137" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_176" x="955.766" y="200.604" width="59.061" height="52.052" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-4"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Tracé_8080" x="854.054" y="0" width="133.332" height="104.791" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-5"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_180" x="792.522" y="113.051" width="87.28" height="93.018" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-6"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-6"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_182" x="1340.791" y="453.964" width="177.672" height="177.672" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-7"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-7"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_269" x="1430.165" y="596.456" width="42.254" height="61.455" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-8"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-8"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_270" x="1381.656" y="596.456" width="42.254" height="61.455" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-9"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-9"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_183" x="1413.995" y="632.837" width="58.423" height="33.159" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-10"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-10"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_184" x="1365.487" y="631.826" width="58.423" height="33.159" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-11"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-11"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Tracé_8082" x="1394.43" y="393.778" width="135.33" height="111.546" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-12"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-12"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_185" x="1289.268" y="468.327" width="100.874" height="74.857" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-13"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-13"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="_Alone_we_can_do_so_little_together_we_can_do_so_much._Helen_Keller" x="144" y="146.791" width="322" height="423" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-14"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-14"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Team_Cbi" x="15" y="36.791" width="462" height="116" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-15"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-15"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Groupe_4484" data-name="Groupe 4484" transform="translate(-276 -200.209)">
+    <g id="Groupe_4450" data-name="Groupe 4450" transform="translate(249.661 206.209)">
+      <path id="Tracé_8066" data-name="Tracé 8066" d="M1069.745,581.769H297.7a2.14,2.14,0,0,1-2.139-2.139V74.915a2.138,2.138,0,0,1,4.277,0V577.49h769.905a2.139,2.139,0,0,1,0,4.279Z" transform="translate(253.81 62.138)" fill="#3f3d56"/>
+      <path id="Tracé_8067" data-name="Tracé 8067" d="M1069.745,295.1H297.7a2.139,2.139,0,1,1,0-4.278h772.042a2.139,2.139,0,0,1,0,4.278Z" transform="translate(253.81 248.29)" fill="#3f3d56"/>
+      <path id="Tracé_8068" data-name="Tracé 8068" d="M1070.322,251.261H298.277a2.138,2.138,0,0,1,0-4.277h772.044a2.138,2.138,0,1,1,0,4.277Z" transform="translate(254.302 210.863)" fill="#3f3d56"/>
+      <path id="Tracé_8069" data-name="Tracé 8069" d="M1070.318,207.422H298.274a2.139,2.139,0,0,1,0-4.278h772.044a2.139,2.139,0,0,1,0,4.278Z" transform="translate(254.306 173.434)" fill="#3f3d56"/>
+      <path id="Tracé_8070" data-name="Tracé 8070" d="M1070.322,163.582H298.277a2.138,2.138,0,0,1,0-4.277h772.044a2.138,2.138,0,1,1,0,4.277Z" transform="translate(254.302 136.007)" fill="#3f3d56"/>
+      <path id="Tracé_8071" data-name="Tracé 8071" d="M1070.322,119.742H298.277a2.138,2.138,0,0,1,0-4.277h772.044a2.138,2.138,0,1,1,0,4.277Z" transform="translate(254.302 98.578)" fill="#3f3d56"/>
+      <path id="Tracé_8072" data-name="Tracé 8072" d="M1070.318,75.9H298.274a2.139,2.139,0,0,1,0-4.278h772.044a2.139,2.139,0,0,1,0,4.278Z" transform="translate(254.306 61.15)" fill="#3f3d56"/>
+      <path id="Tracé_8073" data-name="Tracé 8073" d="M355.756,391.166H328.8a12.516,12.516,0,0,1-12.5-12.5V304.309a12.516,12.516,0,0,1,12.5-12.5h26.959a12.516,12.516,0,0,1,12.5,12.5v74.354A12.516,12.516,0,0,1,355.756,391.166Z" transform="translate(271.508 249.128)" fill="#3f3d56"/>
+      <path id="Tracé_8074" data-name="Tracé 8074" d="M416.324,420.162H389.365a12.516,12.516,0,0,1-12.5-12.5V270.346a12.517,12.517,0,0,1,12.5-12.5h26.959a12.518,12.518,0,0,1,12.5,12.5V407.658A12.517,12.517,0,0,1,416.324,420.162Z" transform="translate(323.218 220.133)" fill="#3f3d56"/>
+      <path id="Tracé_8075" data-name="Tracé 8075" d="M537.46,488.389H510.5a12.516,12.516,0,0,1-12.5-12.5V190.431a12.517,12.517,0,0,1,12.5-12.5H537.46a12.518,12.518,0,0,1,12.5,12.5V475.886A12.517,12.517,0,0,1,537.46,488.389Z" transform="translate(426.638 151.905)" fill="#e6e6e6"/>
+      <path id="Tracé_8076" data-name="Tracé 8076" d="M476.315,443.369H449.356a12.516,12.516,0,0,1-12.5-12.5v-187.7a12.516,12.516,0,0,1,12.5-12.5h26.959a12.517,12.517,0,0,1,12.5,12.5v187.7A12.517,12.517,0,0,1,476.315,443.369Z" transform="translate(374.435 196.926)" fill="#3f3d56"/>
+      <path id="Tracé_8077" data-name="Tracé 8077" d="M598.028,522.99H571.068a12.517,12.517,0,0,1-12.5-12.5V149.9a12.518,12.518,0,0,1,12.5-12.5h26.961a12.518,12.518,0,0,1,12.5,12.5V510.487A12.517,12.517,0,0,1,598.028,522.99Z" transform="translate(478.347 117.304)" fill="#3f3d56"/>
+      <path id="Tracé_8078" data-name="Tracé 8078" d="M658.6,488.389H631.636a12.517,12.517,0,0,1-12.5-12.5V190.431a12.52,12.52,0,0,1,12.5-12.5H658.6a12.518,12.518,0,0,1,12.5,12.5V475.886A12.517,12.517,0,0,1,658.6,488.389Z" transform="translate(530.057 151.905)" fill="#3f3d56"/>
+      <path id="Tracé_8079" data-name="Tracé 8079" d="M719.165,579.292H692.2a12.518,12.518,0,0,1-12.5-12.5V83.957a12.518,12.518,0,0,1,12.5-12.5h26.961a12.518,12.518,0,0,1,12.5,12.5V566.788A12.518,12.518,0,0,1,719.165,579.292Z" transform="translate(581.767 61.003)" fill="#e6e6e6"/>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Ellipse_174)">
+        <circle id="Ellipse_174-2" data-name="Ellipse 174" cx="77.88" cy="77.88" r="77.88" transform="translate(827.56 209.72) rotate(-80.78)" fill="#1c1d22"/>
+      </g>
+      <rect id="Rectangle_267" data-name="Rectangle 267" width="42.391" height="23.66" transform="translate(875.729 209.475) rotate(-26.601)" fill="#2f2e41"/>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Ellipse_175)">
+        <ellipse id="Ellipse_175-2" data-name="Ellipse 175" cx="7.394" cy="19.717" rx="7.394" ry="19.717" transform="translate(827.99 218.95) rotate(-56.6)" fill="#1c1d22"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Rectangle_268)">
+        <rect id="Rectangle_268-2" data-name="Rectangle 268" width="23.66" height="42.391" transform="translate(935.93 217.65) rotate(-63.4)" fill="#1c1d22"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Ellipse_176)">
+        <ellipse id="Ellipse_176-2" data-name="Ellipse 176" cx="19.717" cy="7.394" rx="19.717" ry="7.394" transform="translate(964.77 228.31) rotate(-33.4)" fill="#1c1d22"/>
+      </g>
+      <circle id="Ellipse_177" data-name="Ellipse 177" cx="26.617" cy="26.617" r="26.617" transform="translate(907.116 142.087) rotate(-80.41)" fill="#fff"/>
+      <ellipse id="Ellipse_178" data-name="Ellipse 178" cx="8.835" cy="8.898" rx="8.835" ry="8.898" transform="translate(925.439 131.081) rotate(-45)" fill="#1c1d22"/>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Tracé_8080)">
+        <path id="Tracé_8080-2" data-name="Tracé 8080" d="M594.278,54.6c1.17-28.833-23.678-53.255-55.5-54.547S480.2,21.086,479.03,49.918,499.982,85.3,531.807,86.594,593.107,83.432,594.278,54.6Z" transform="translate(384.07 6)" fill="#a5cf4b"/>
+      </g>
+      <ellipse id="Ellipse_179" data-name="Ellipse 179" cx="12.225" cy="38.94" rx="12.225" ry="38.94" transform="matrix(0.759, -0.651, 0.651, 0.759, 989.572, 128.977)" fill="#1c1d22"/>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Ellipse_180)">
+        <ellipse id="Ellipse_180-2" data-name="Ellipse 180" cx="38.94" cy="12.225" rx="38.94" ry="12.225" transform="matrix(0.65, -0.76, 0.76, 0.65, 801.52, 178.14)" fill="#1c1d22"/>
+      </g>
+      <path id="Tracé_8081" data-name="Tracé 8081" d="M535.778,95.976a17.746,17.746,0,0,1-34.917,6.356l-.005-.033c-1.746-9.645,5.71-13.056,15.353-14.8S534.032,86.333,535.778,95.976Z" transform="translate(428.86 74.041)" fill="#fff"/>
+      <ellipse id="Ellipse_181" data-name="Ellipse 181" cx="12.531" cy="39.918" rx="12.531" ry="39.918" transform="translate(1505.647 525.1) rotate(-39.938)" fill="#1c1d22"/>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Ellipse_182)">
+        <circle id="Ellipse_182-2" data-name="Ellipse 182" cx="79.836" cy="79.836" r="79.836" transform="translate(1349.79 459.96)" fill="#1c1d22"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Rectangle_269)">
+        <rect id="Rectangle_269-2" data-name="Rectangle 269" width="24.254" height="43.455" transform="translate(1439.16 602.46)" fill="#1c1d22"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Rectangle_270)">
+        <rect id="Rectangle_270-2" data-name="Rectangle 270" width="24.254" height="43.455" transform="translate(1390.66 602.46)" fill="#1c1d22"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Ellipse_183)">
+        <ellipse id="Ellipse_183-2" data-name="Ellipse 183" cx="20.212" cy="7.579" rx="20.212" ry="7.579" transform="translate(1423 638.84)" fill="#1c1d22"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Ellipse_184)">
+        <ellipse id="Ellipse_184-2" data-name="Ellipse 184" cx="20.212" cy="7.579" rx="20.212" ry="7.579" transform="translate(1374.49 637.83)" fill="#1c1d22"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Tracé_8082)">
+        <path id="Tracé_8082-2" data-name="Tracé 8082" d="M771.619,252.088c7.13-28.709,38.6-45.6,70.285-37.735s51.6,37.52,44.47,66.229-30.78,28.8-62.468,20.933S764.491,280.8,771.619,252.088Z" transform="translate(632.94 187.36)" fill="#ccc"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 26.34, -6)" filter="url(#Ellipse_185)">
+        <ellipse id="Ellipse_185-2" data-name="Ellipse 185" cx="12.531" cy="39.918" rx="12.531" ry="39.918" transform="translate(1298.27 496.97) rotate(-64.63)" fill="#1c1d22"/>
+      </g>
+      <circle id="Ellipse_186" data-name="Ellipse 186" cx="26.617" cy="26.617" r="26.617" transform="translate(1417.413 490.337)" fill="#fff"/>
+      <circle id="Ellipse_187" data-name="Ellipse 187" cx="8.872" cy="8.872" r="8.872" transform="translate(1424.218 498.541)" fill="#1c1d22"/>
+      <path id="Tracé_8083" data-name="Tracé 8083" d="M803.392,313.046a17.745,17.745,0,0,1-34.915,6.356h0l-.008-.035c-1.744-9.643,5.711-13.056,15.355-14.8S801.646,303.4,803.392,313.046Z" transform="translate(657.336 259.364)" fill="#fff"/>
+      <path id="Tracé_8084" data-name="Tracé 8084" d="M744.339,594.158H717.38a12.517,12.517,0,0,1-12.5-12.5V98.822a12.517,12.517,0,0,1,12.5-12.5h26.959a12.518,12.518,0,0,1,12.5,12.5V581.655A12.518,12.518,0,0,1,744.339,594.158Z" transform="translate(603.261 73.694)" fill="#a5cf4b"/>
+      <path id="Tracé_8088" data-name="Tracé 8088" d="M568.89,370.645l-26.164,6.5a12.517,12.517,0,0,1-15.149-9.119L458.733,91a12.518,12.518,0,0,1,9.119-15.151l26.164-6.5a12.517,12.517,0,0,1,15.151,9.119L578.009,355.5A12.516,12.516,0,0,1,568.89,370.645Z" transform="translate(392.801 58.891)" fill="#0099d5"/>
+      <circle id="Ellipse_200" data-name="Ellipse 200" cx="20.391" cy="20.391" r="20.391" transform="translate(430.231 114.523)" fill="#e6e6e6"/>
+      <circle id="Ellipse_201" data-name="Ellipse 201" cx="20.391" cy="20.391" r="20.391" transform="translate(430.231 195.79)" fill="#e6e6e6"/>
+      <circle id="Ellipse_202" data-name="Ellipse 202" cx="20.391" cy="20.391" r="20.391" transform="translate(430.231 277.058)" fill="#e6e6e6"/>
+      <circle id="Ellipse_203" data-name="Ellipse 203" cx="20.391" cy="20.391" r="20.391" transform="translate(430.231 358.326)" fill="#e6e6e6"/>
+      <circle id="Ellipse_204" data-name="Ellipse 204" cx="20.391" cy="20.391" r="20.391" transform="translate(430.231 439.594)" fill="#e6e6e6"/>
+      <circle id="Ellipse_205" data-name="Ellipse 205" cx="20.391" cy="20.391" r="20.391" transform="translate(430.231 520.861)" fill="#e6e6e6"/>
+      <g id="Groupe_4482" data-name="Groupe 4482" transform="translate(26.339 322.636)">
+        <circle id="Ellipse_206" data-name="Ellipse 206" cx="43.067" cy="43.067" r="43.067" transform="translate(71.077 244.889)" fill="#1c1d22"/>
+        <rect id="Rectangle_278" data-name="Rectangle 278" width="13.084" height="23.442" transform="translate(94.519 321.756)" fill="#1c1d22"/>
+        <rect id="Rectangle_279" data-name="Rectangle 279" width="13.084" height="23.442" transform="translate(120.686 321.756)" fill="#1c1d22"/>
+        <circle id="Ellipse_207" data-name="Ellipse 207" cx="14.719" cy="14.719" r="14.719" transform="translate(100.515 262.334)" fill="#fff"/>
+        <circle id="Ellipse_208" data-name="Ellipse 208" cx="4.906" cy="4.906" r="4.906" transform="translate(110.328 272.147)" fill="#1c1d22"/>
+        <path id="Tracé_8117" data-name="Tracé 8117" d="M72.367,247.9C68.89,232.332,80.006,216.6,97.2,212.757s33.944,5.675,37.422,21.249-7.915,21.317-25.1,25.156S75.845,263.479,72.367,247.9Z" fill="#ccc"/>
+        <ellipse id="Ellipse_209" data-name="Ellipse 209" cx="21.534" cy="6.76" rx="21.534" ry="6.76" transform="matrix(0.357, -0.934, 0.934, 0.357, 125.229, 149.385)" fill="#1c1d22"/>
+        <circle id="Ellipse_210" data-name="Ellipse 210" cx="43.067" cy="43.067" r="43.067" transform="translate(56.358 121.139)" fill="#1c1d22"/>
+        <rect id="Rectangle_280" data-name="Rectangle 280" width="13.084" height="23.442" transform="translate(79.799 198.006)" fill="#1c1d22"/>
+        <rect id="Rectangle_281" data-name="Rectangle 281" width="13.084" height="23.442" transform="translate(105.967 198.006)" fill="#1c1d22"/>
+        <ellipse id="Ellipse_211" data-name="Ellipse 211" cx="10.903" cy="4.089" rx="10.903" ry="4.089" transform="translate(79.799 217.632)" fill="#1c1d22"/>
+        <ellipse id="Ellipse_212" data-name="Ellipse 212" cx="10.903" cy="4.089" rx="10.903" ry="4.089" transform="translate(105.967 217.086)" fill="#1c1d22"/>
+        <circle id="Ellipse_213" data-name="Ellipse 213" cx="14.719" cy="14.719" r="14.719" transform="translate(85.796 138.584)" fill="#fff"/>
+        <circle id="Ellipse_214" data-name="Ellipse 214" cx="4.906" cy="4.906" r="4.906" transform="translate(95.609 148.397)" fill="#1c1d22"/>
+        <path id="Tracé_8118" data-name="Tracé 8118" d="M57.648,124.155c-3.477-15.574,7.639-31.311,24.829-35.149s33.944,5.675,37.422,21.249-7.915,21.318-25.105,25.156S61.126,139.729,57.648,124.155Z" fill="#a5cf4b"/>
+        <ellipse id="Ellipse_215" data-name="Ellipse 215" cx="6.76" cy="21.534" rx="6.76" ry="21.534" transform="translate(28.564 141.103) rotate(-64.626)" fill="#1c1d22"/>
+        <path id="Tracé_8119" data-name="Tracé 8119" d="M78.27,179.743c0,4.215,10.854,12.539,22.9,12.539S124.5,180.415,124.5,176.2s-11.292.817-23.335.817S78.27,175.528,78.27,179.743Z" fill="#fff"/>
+        <path id="Tracé_8120" data-name="Tracé 8120" d="M182.536,154.975l-31.7,6.189a3.442,3.442,0,0,1-2.92-.773,3.5,3.5,0,0,1-1.217-2.82,82.894,82.894,0,0,0-7.376-37.786,3.5,3.5,0,0,1,.067-3.07A3.441,3.441,0,0,1,141.8,114.9l31.7-6.188a3.485,3.485,0,0,1,3.928,2.209,135.674,135.674,0,0,1,7.912,40.529A3.484,3.484,0,0,1,182.536,154.975Z" fill="#0099d5"/>
+        <path id="Tracé_8121" data-name="Tracé 8121" d="M43.536,183.975l-31.7,6.189a3.442,3.442,0,0,1-2.92-.773,3.5,3.5,0,0,1-1.217-2.82A82.894,82.894,0,0,0,.322,148.785a3.5,3.5,0,0,1,.067-3.07A3.441,3.441,0,0,1,2.805,143.9l31.7-6.188a3.484,3.484,0,0,1,3.928,2.209,135.674,135.674,0,0,1,7.912,40.529A3.484,3.484,0,0,1,43.536,183.975Z" fill="#ccc"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 276, 200.21)" filter="url(#_Alone_we_can_do_so_little_together_we_can_do_so_much._Helen_Keller)">
+      <text id="_Alone_we_can_do_so_little_together_we_can_do_so_much._Helen_Keller-2" data-name="&quot;Alone we 
+can do so 
+little; 
+together we 
+can do so
+much.&quot;
+Helen Keller" transform="translate(305 236.79)" fill="#1b1c21" font-size="90" font-family="FelixTitlingMT, Felix Titling" letter-spacing="0.209em"><tspan x="-135.94" y="0">&quot;</tspan><tspan y="0" font-size="46" font-family="BebasNeue, Bebas Neue">Alone We </tspan><tspan font-size="46" font-family="BebasNeue, Bebas Neue"><tspan x="-118.22" y="63">Can Do So </tspan><tspan x="-86.296" y="112">Little; </tspan><tspan x="-151.869" y="161">Together We </tspan><tspan x="-109.848" y="210">Can Do So</tspan><tspan x="-76.084" y="259">Much.&quot;</tspan></tspan><tspan font-size="23.332" font-family="BebasNeue, Bebas Neue" baseline-shift="-13.332000418508848"><tspan x="-77.147" y="303">Helen Keller</tspan></tspan></text>
+    </g>
+    <line id="Ligne_87" data-name="Ligne 87" y2="192.519" transform="translate(386.5 393.5)" fill="none" stroke="#1b1c21" stroke-width="1" opacity="0.2"/>
+    <line id="Ligne_88" data-name="Ligne 88" y2="192.519" transform="translate(395.5 411.5)" fill="none" stroke="#1b1c21" stroke-width="1" opacity="0.2"/>
+    <line id="Ligne_89" data-name="Ligne 89" y2="192.519" transform="translate(404.5 421.5)" fill="none" stroke="#1b1c21" stroke-width="1" opacity="0.2"/>
+    <g id="Groupe_4481" data-name="Groupe 4481" transform="translate(-55 94)">
+      <rect id="Rectangle_277" data-name="Rectangle 277" width="488" height="111" transform="translate(354 163)" fill="#e0ebc9"/>
+      <path id="Tracé_8116" data-name="Tracé 8116" d="M0,0H488V111H0Z" transform="translate(346 154)" fill="#b5dded"/>
+      <rect id="Rectangle_275" data-name="Rectangle 275" width="488" height="111" transform="translate(333 142)" fill="#1b1c21"/>
+      <g transform="matrix(1, 0, 0, 1, 331, 106.21)" filter="url(#Team_Cbi)">
+        <text id="Team_Cbi-2" data-name="Team Cbi" transform="translate(246 124.79)" fill="#f6f6f6" font-size="94" font-family="aliensandcows, aliens and cows" letter-spacing="0.209em"><tspan x="-221.253" y="0">Team Cbi</tspan></text>
+      </g>
+    </g>
+    <g id="Groupe_4483" data-name="Groupe 4483" transform="translate(277.481 529.163)">
+      <ellipse id="Ellipse_216" data-name="Ellipse 216" cx="10.903" cy="4.089" rx="10.903" ry="4.089" transform="translate(94.519 341.382)" fill="#1c1d22"/>
+      <ellipse id="Ellipse_217" data-name="Ellipse 217" cx="10.903" cy="4.089" rx="10.903" ry="4.089" transform="translate(120.686 340.837)" fill="#1c1d22"/>
+    </g>
+    <path id="Tracé_8122" data-name="Tracé 8122" d="M789.754,309.459a10.865,10.865,0,1,1-21.378,3.892h0l0-.022c-1.068-5.9,3.5-7.994,9.4-9.063S788.684,303.555,789.754,309.459Z" transform="translate(-387.129 526.424)" fill="#fff"/>
+  </g>
+</svg>

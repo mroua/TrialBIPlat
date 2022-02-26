@@ -1,0 +1,54 @@
+API
+/////requettelogin = json.loads(requests.post("http://10.10.10.64:8180/newlog/?identifiant=" + identifiant + "&password=" + str(password)).text)
+
+
+Login AD2000
+
+def connexion_ad2000(identifiant, passw_util):
+    server = Server('10.10.10.10', get_info=ldap3.ALL)
+    email=''
+    societe=''
+    departement = ''
+    nom = ''
+    title = ''
+    try:
+        conn = Connection(server, "GROUPE-HASNAOUI\\"+identifiant, passw_util, auto_bind=True)
+        if (conn):
+            conn.search(search_base="dc=groupe-hasnaoui,dc=local",
+                        search_filter='(sAMAccountName=' + identifiant + ')',
+                        search_scope=ldap3.SUBTREE,
+                        attributes=['mail', 'company', 'department', 'name', 'title']
+                        )
+            email = str(conn.entries[0].mail)
+            societe = str(conn.entries[0].company)
+            departement = str(conn.entries[0].department)
+            nom = str(conn.entries[0].name)
+            title = str(conn.entries[0].title)
+
+        return {'pseudo': identifiant, 'email': email, 'societe': societe, 'departement': departement, 'nom': nom, 'title': title}
+    except Exception as e:
+        return ('erreur')
+
+def connexion_email(identifiant, passw_util):
+    server = Server('10.10.10.10', get_info=ldap3.ALL)
+    pseudo = ''
+    societe = ''
+    departement = ''
+    nom = ''
+    title = ''
+    try:
+        conn = Connection(server, identifiant, passw_util, auto_bind=True)
+        if (conn):
+            conn.search(search_base="dc=groupe-hasnaoui,dc=local",
+                        search_filter='(mail=' + identifiant + ')',
+                        attributes=['sAMAccountName', 'company', 'department', 'name', 'title']
+                        )
+            pseudo = str(conn.entries[0].sAMAccountName)
+            societe = str(conn.entries[0].company)
+            departement = str(conn.entries[0].department)
+            nom = str(conn.entries[0].name)
+            title = str(conn.entries[0].title)
+        return {'pseudo': pseudo, 'email': identifiant, 'societe': societe, 'departement': departement, 'nom': nom, 'title': title}
+
+    except Exception as e:
+        return ('erreur')
