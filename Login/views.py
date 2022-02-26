@@ -11,59 +11,6 @@ from .models import PROFILE, OBJETSITE, HISTORIQUELOGIN, Userinconnu, Pages
 lien = ''
 
 
-def societeabr(abr):
-    try:
-        if abr == "GSHA":
-            societe = OBJETSITE.objects.get(nom= "GSH", type=3)
-        elif abr == "SODE":
-            societe = OBJETSITE.objects.get(nom="SODEA", type=3)
-        elif abr == "BTPH":
-            societe = OBJETSITE.objects.get(nom="BTPH", type=3)
-        elif abr == "HFCM":
-            societe = OBJETSITE.objects.get(nom="HFCM", type=3)
-        elif abr == "STON":
-            societe = OBJETSITE.objects.get(nom="ALPOSTONE", type=3)
-        elif abr == "GRAN":
-            societe = OBJETSITE.objects.get(nom="GRANITTAM", type=3)
-        elif abr == "SECH":
-            societe = OBJETSITE.objects.get(nom="SECH", type=3)
-        elif abr == "TAMS":
-            societe = OBJETSITE.objects.get(nom="TAMSTONES", type=3)
-        elif abr == "ALUX":
-            societe = OBJETSITE.objects.get(nom="ALUMIX", type=3)
-        elif abr == "HGPS":
-            societe = OBJETSITE.objects.get(nom="HGP", type=3)
-        elif abr == "HTFS":
-            societe = OBJETSITE.objects.get(nom="HTF", type=3)
-        elif abr == "HMDM":
-            societe = OBJETSITE.objects.get(nom="MDM", type=3)
-        elif abr == "PUMA":
-            societe = OBJETSITE.objects.get(nom="PUMA", type=3)
-        elif abr == "STRU":
-            societe = OBJETSITE.objects.get(nom="STRUGAL", type=3)
-        elif abr == "TEKN":
-            societe = OBJETSITE.objects.get(nom="TEKNA", type=3)
-        elif abr == "CLIN":
-            societe = OBJETSITE.objects.get(nom="CLINIQUE HASNAOUI", type=3)
-        elif abr == "GAMS":
-            societe = OBJETSITE.objects.get(nom="GAMMA", type=3)
-        elif abr == "GRYD":
-            societe = OBJETSITE.objects.get(nom="GIRYAD", type=3)
-        elif abr == "HFND":
-            societe = OBJETSITE.objects.get(nom="HASNAOUI FONDATION", type=3)
-        elif abr == "HSPI":
-            societe = OBJETSITE.objects.get(nom="HASNAOUI SPI", type=3)
-        elif abr == "HLOG":
-            societe = OBJETSITE.objects.get(nom="HL", type=3)
-        elif abr == "HTAS":
-            societe = OBJETSITE.objects.get(nom="HTA", type=3)
-        elif abr == "PHAR":
-            societe = OBJETSITE.objects.get(nom="LE PHARE", type=3)
-        else:
-            return None
-        return societe
-    except Exception:
-        return None
 
 def get_all_childs(elem, liste):
     if(elem.type == "6"):

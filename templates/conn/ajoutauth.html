@@ -256,7 +256,7 @@
                             <select name="type" class="form-control" onchange="RaffraichirChoixtype(this.value)" id="id_type">
                                 <option value="1" selected>Consolidé</option>
                                 <option value="2">Pôle</option>
-                                <option value="3">Société</option>
+                                <option value="3">Région</option>
                                 <option value="4">Direction/Sous-direction</option>
                                 <option value="5">Rapport</option>
                             </select>
@@ -407,7 +407,7 @@
                     textauth = textauth+"au "+$id_parent.find('option:selected').text()+" en intégralité";
                     break;
                 case '3':
-                    textauth = textauth+"a la société "+$id_parent.find('option:selected').text()+" en intégralité";
+                    textauth = textauth+"a la région "+$id_parent.find('option:selected').text()+" en intégralité";
                     break;
                 case '4':
                     switch (niveau) {
@@ -504,7 +504,8 @@
                 if (!$( "#champniveaux" ).length ) {
                     $champtype.after('<div class="row champniveaux" id="champniveaux"><select class="form-control" id="selectniveau" onchange="RaffraichirChoixtype(4)">' +
                         '<option value="1">Consolidé</option>' +
-                        '<option value="2">Pole</option><option value="3">Société</option></select></div>')
+                        '<option value="2">Pole</option>' +
+                        '<option value="3">Région</option></select></div>')
                 }
                 niveau = $("#selectniveau").val();
                 switch (niveau) {
@@ -568,7 +569,7 @@
             case "5":
                 if (!$( "#champniveaux" ).length ) {
                     $champtype.after('<div class="row champniveaux" id="champniveaux"><select class="form-control" id="selectniveau" onchange="RaffraichirChoixtype(5)"><option value="1">Consolidé</option>' +
-                        '<option value="2">Pole</option><option value="3">Société</option></select></div>')
+                        '<option value="2">Pole</option><option value="3">Région</option></select></div>')
                 }
                 niveau = $("#selectniveau").val();
                 switch (niveau) {

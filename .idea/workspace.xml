@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/bi/views.py" line="1572" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5c3c8dd7-b18c-49be-8bb4-e54c4ada0802" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/CBINew/static/login/newint/image2vector (1).svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CBINew/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/CBINew/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CBINew/static/site/css/organicfoodicons.css" beforeDir="false" afterPath="$PROJECT_DIR$/CBINew/static/site/css/organicfoodicons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Login/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/LoginPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/LoginPage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/conn/adminpage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conn/adminpage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/conn/ajoutauth.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conn/ajoutauth.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/conn/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conn/index.html" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CBINew/static/login/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+              <folding>
+                <element signature="e#225#232#1" expanded="true" />
+                <element signature="e#225#232#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/conn/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="246" column="46" selection-start-line="246" selection-start-column="46" selection-end-line="246" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>page =</find>
+      <find>row[2].value,</find>
+      <find>newhysto</find>
+      <find>Reports</find>
+      <find>page = '</find>
+      <find>Script</find>
+      <find>setInterval</find>
+      <find>reques</find>
+      <find>veri</find>
+      <find>forsmsetobjet</find>
+      <find>listedictoauth_user</find>
+      <find>requests</find>
+      <find>.so</find>
+      <find>OjetSiteFormset</find>
+      <find>soci</find>
+      <find>droitauth</find>
+      <find>societeabr</find>
+      <find>GSH</find>
+      <find>droi</find>
+      <find>login100-form-btn</find>
+      <find>Login.svg</find>
+      <find>url</find>
+      <find>white</find>
+      <find>Gsh</find>
+      <find>bdd</find>
+      <find>soc</find>
+      <find>consolidé</find>
+      <find>Consolidé</find>
+      <find>selectniveau</find>
+      <find>Société</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>127.0.0.1:8000/</replace>
+      <replace>2a2b30</replace>
+      <replace>#42B883</replace>
+      <replace>redirect('/')</replace>
+      <replace>chargementparent('conso'</replace>
+      <replace>background: #fff</replace>
+      <replace>chargementparent('pole'</replace>
+      <replace>slideraceuilifo</replace>
+      <replace>$loadingpage.css('display', 'block');</replace>
+      <replace>$loadingpage.css('display', 'none');</replace>
+      <replace>.container-fluid</replace>
+      <replace>#a5cf4b</replace>
+      <replace>.container-datainf</replace>
+      <replace>$('body').css</replace>
+      <replace>accueil</replace>
+      <replace>https://gshcbiapi.groupe-hasnaoui.com/gsh_cbi/webapi</replace>
+      <replace />
+      <replace>str(row[2].value)</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/CBINew/static/login/css/main.css" />
+        <option value="$PROJECT_DIR$/templates/conn/apropos.html" />
+        <option value="$PROJECT_DIR$/Login/verifieraut.py" />
+        <option value="$PROJECT_DIR$/bi/etl.py" />
+        <option value="$PROJECT_DIR$/ancien.py" />
+        <option value="$PROJECT_DIR$/Login/loginviewanc" />
+        <option value="$PROJECT_DIR$/CBINew/static/login/js/main.js" />
+        <option value="$PROJECT_DIR$/templates/conn/slider.html" />
+        <option value="$PROJECT_DIR$/bi/models.py" />
+        <option value="$PROJECT_DIR$/templates/conn/Autorisation.html" />
+        <option value="$PROJECT_DIR$/templates/conn/AutorisationAdmin.html" />
+        <option value="$PROJECT_DIR$/templates/conn/historique.html" />
+        <option value="$PROJECT_DIR$/ancien.txt" />
+        <option value="$PROJECT_DIR$/templates/conn/sliderinfo.html" />
+        <option value="$PROJECT_DIR$/CBINew/static/site/css/demo.css" />
+        <option value="$PROJECT_DIR$/templates/conn/statistiqueadmin.html" />
+        <option value="$PROJECT_DIR$/bi/urls.py" />
+        <option value="$PROJECT_DIR$/templates/conn/authinfo.html" />
+        <option value="$PROJECT_DIR$/templates/conn/baseconn.html" />
+        <option value="$PROJECT_DIR$/templates/conn/information.html" />
+        <option value="$PROJECT_DIR$/bi/admin.py" />
+        <option value="$PROJECT_DIR$/templates/conn/messagerieuser.html" />
+        <option value="$PROJECT_DIR$/templates/conn/messagerie.html" />
+        <option value="$PROJECT_DIR$/templates/conn/accueil.html" />
+        <option value="$PROJECT_DIR$/templates/autre/code" />
+        <option value="$PROJECT_DIR$/templates/autre/contenairamodif.html" />
+        <option value="$PROJECT_DIR$/exp.env" />
+        <option value="$PROJECT_DIR$/CBINew/urls.py" />
+        <option value="$PROJECT_DIR$/proxy/uwsgi_params" />
+        <option value="$PROJECT_DIR$/proxy/default.conf.tpl" />
+        <option value="$PROJECT_DIR$/proxy/run.sh" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/Scripts/run.sh" />
+        <option value="$PROJECT_DIR$/scripts/run.sh" />
+        <option value="$PROJECT_DIR$/proxy/Dockerfile" />
+        <option value="$PROJECT_DIR$/scripts/docker-compose-deploy.yml" />
+        <option value="$PROJECT_DIR$/.env.sample" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/docker-compose.yml" />
+        <option value="$PROJECT_DIR$/Login/urls.py" />
+        <option value="$PROJECT_DIR$/bi/form.py" />
+        <option value="$PROJECT_DIR$/bi/views.py" />
+        <option value="$PROJECT_DIR$/Login/admin.py" />
+        <option value="$PROJECT_DIR$/Login/models.py" />
+        <option value="$PROJECT_DIR$/Login/views.py" />
+        <option value="$PROJECT_DIR$/CBINew/settings.py" />
+        <option value="$PROJECT_DIR$/templates/LoginPage.html" />
+        <option value="$PROJECT_DIR$/CBINew/static/site/css/organicfoodicons.css" />
+        <option value="$PROJECT_DIR$/templates/conn/ajoutauth.html" />
+        <option value="$PROJECT_DIR$/templates/conn/adminpage.html" />
+        <option value="$PROJECT_DIR$/templates/conn/index.html" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CBINew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CBINew" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CBINew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CBINew" type="462c0819:PsiDirectoryNode" />
+              <item name="bi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CBINew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CBINew" type="462c0819:PsiDirectoryNode" />
+              <item name="CBINew" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CBINew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CBINew" type="462c0819:PsiDirectoryNode" />
+              <item name="Login" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CBINew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CBINew" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CBINew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CBINew" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="conn" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="Docker" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\marouf_h.GROUPE-HASNAOUI\Desktop\CBINew\CBINew\static\login\newint" />
+      <recent name="D:\Users\marouf_h.GROUPE-HASNAOUI\Desktop\CBINew\CBINew\static\login\fonts\roboto" />
+      <recent name="D:\Users\marouf_h.GROUPE-HASNAOUI\Desktop\CBINew\CBINew\static\site\img" />
+      <recent name="D:\Users\marouf_h.GROUPE-HASNAOUI\Desktop\CBINew\CBINew\static\login\assets\images" />
+      <recent name="D:\Users\marouf_h.GROUPE-HASNAOUI\Desktop\CBINew\CBINew\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\marouf_h.GROUPE-HASNAOUI\Desktop\CBINew" />
+      <recent name="D:\Users\marouf_h.GROUPE-HASNAOUI\Desktop\CBINew\Login" />
+      <recent name="D:\Users\marouf_h.GROUPE-HASNAOUI\Desktop\CBINew\Login\migrations" />
+      <recent name="D:\Users\marouf_h.GROUPE-HASNAOUI\Desktop\CBINew\CBINew\static\site\img" />
+      <recent name="D:\Users\marouf_h.GROUPE-HASNAOUI\Desktop\CBINew\templates" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+    <configuration name="CBINew" type="Python.DjangoServer" factoryName="Django server">
+      <module name="CBINew" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5c3c8dd7-b18c-49be-8bb4-e54c4ada0802" name="Default Changelist" comment="" />
+      <created>1595252433324</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1595252433324</updated>
+      <workItem from="1595252435963" duration="2145000" />
+      <workItem from="1595254976914" duration="5365000" />
+      <workItem from="1595320955059" duration="48245000" />
+      <workItem from="1595667637582" duration="2770000" />
+      <workItem from="1595680567047" duration="347000" />
+      <workItem from="1595680963992" duration="52981000" />
+      <workItem from="1596351694498" duration="22860000" />
+      <workItem from="1596462677968" duration="64019000" />
+      <workItem from="1596957737677" duration="50630000" />
+      <workItem from="1597129436998" duration="62216000" />
+      <workItem from="1597561955915" duration="20823000" />
+      <workItem from="1597754388061" duration="28050000" />
+      <workItem from="1598008104805" duration="80246000" />
+      <workItem from="1598642772455" duration="649000" />
+      <workItem from="1598771079032" duration="63791000" />
+      <workItem from="1599029610011" duration="32601000" />
+      <workItem from="1599375700785" duration="53148000" />
+      <workItem from="1599644661101" duration="31567000" />
+      <workItem from="1599991658210" duration="48745000" />
+      <workItem from="1600587650444" duration="22165000" />
+      <workItem from="1600682456357" duration="37000" />
+      <workItem from="1600682507098" duration="40634000" />
+      <workItem from="1601200339401" duration="1247000" />
+      <workItem from="1601368291635" duration="13498000" />
+      <workItem from="1601450153580" duration="17066000" />
+      <workItem from="1601797516769" duration="4886000" />
+      <workItem from="1601990171227" duration="11267000" />
+      <workItem from="1602075177752" duration="3843000" />
+      <workItem from="1602144464773" duration="8779000" />
+      <workItem from="1602499876208" duration="3955000" />
+      <workItem from="1602593009016" duration="209000" />
+      <workItem from="1602683438200" duration="657000" />
+      <workItem from="1602750373280" duration="5054000" />
+      <workItem from="1603006175494" duration="1011000" />
+      <workItem from="1603024075339" duration="5824000" />
+      <workItem from="1603179617670" duration="14262000" />
+      <workItem from="1603379642664" duration="3951000" />
+      <workItem from="1603783456346" duration="2270000" />
+      <workItem from="1603871292558" duration="4037000" />
+      <workItem from="1604831102548" duration="9371000" />
+      <workItem from="1605448302008" duration="4820000" />
+      <workItem from="1607332081767" duration="733000" />
+      <workItem from="1607937052525" duration="876000" />
+      <workItem from="1607940029687" duration="1790000" />
+      <workItem from="1609661288405" duration="868000" />
+      <workItem from="1609684765971" duration="10401000" />
+      <workItem from="1610028237157" duration="1963000" />
+      <workItem from="1610266994709" duration="939000" />
+      <workItem from="1610613783328" duration="1877000" />
+      <workItem from="1610867727763" duration="1050000" />
+      <workItem from="1610880000547" duration="1832000" />
+      <workItem from="1611735043648" duration="1147000" />
+      <workItem from="1612864260711" duration="624000" />
+      <workItem from="1613379389498" duration="67000" />
+      <workItem from="1614002698657" duration="1001000" />
+      <workItem from="1614064049086" duration="6450000" />
+      <workItem from="1614430862767" duration="114000" />
+      <workItem from="1614431751094" duration="1404000" />
+      <workItem from="1614871900000" duration="16000" />
+      <workItem from="1615103999914" duration="643000" />
+      <workItem from="1616938165149" duration="900000" />
+      <workItem from="1617091925596" duration="89000" />
+      <workItem from="1622454685041" duration="1286000" />
+      <workItem from="1622532212076" duration="292000" />
+      <workItem from="1622708487387" duration="1193000" />
+      <workItem from="1623077859631" duration="778000" />
+      <workItem from="1627381099130" duration="13158000" />
+      <workItem from="1627832158997" duration="1760000" />
+      <workItem from="1627888159623" duration="1293000" />
+      <workItem from="1627911850095" duration="11943000" />
+      <workItem from="1627981599575" duration="11000" />
+      <workItem from="1627981668984" duration="586000" />
+      <workItem from="1627982611418" duration="352000" />
+      <workItem from="1637652835709" duration="1442000" />
+      <workItem from="1637742224481" duration="1403000" />
+      <workItem from="1640183814295" duration="1384000" />
+      <workItem from="1640195667514" duration="3231000" />
+      <workItem from="1645864262105" duration="8776000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="933713000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15405117" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="Docker" order="7" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50319827" side_tool="true" weight="0.32719395" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4968017" visible="true" weight="0.32394367" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32936078" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32932165" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="5" side_tool="true" weight="0.32942432" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.33527696" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50319827" side_tool="true" weight="0.32719395" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4968017" visible="true" weight="0.32394367" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32936078" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32932165" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="5" side_tool="true" weight="0.32942432" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/newinterfacebi" />
+    </ignored-roots>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/templates/autre/contenairamodif.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="836" column="50" selection-start-line="836" selection-start-column="50" selection-end-line="836" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python36/Tools/demo/ss1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="565" column="13" selection-start-line="565" selection-start-column="13" selection-end-line="565" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ancien.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="562">
+          <caret line="440" column="51" selection-start-line="440" selection-start-column="51" selection-end-line="440" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/run.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/assets/vendors/ace-builds/src-min/mode-lsl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="14213" selection-start-column="14213" selection-end-column="14213" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose-deploy.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="13" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/run.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/default.conf.tpl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="54" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/uwsgi_params">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#630#672#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env.sample">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2669">
+          <caret line="157" selection-start-line="157" selection-end-line="157" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/conn/accueil.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="59" column="44" selection-start-line="59" selection-start-column="44" selection-end-line="59" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bi/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="7" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="8" selection-start-line="13" selection-end-line="13" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Login/verifieraut.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Login/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/setuptools/command/bdist_egg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="326" column="40" selection-start-line="326" selection-start-column="40" selection-end-line="326" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bi/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/newint/image2vector (1).svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Login/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Login/loginviewanc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="44" column="50" selection-start-line="44" selection-start-column="50" selection-end-line="44" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="128" column="34" selection-start-line="128" selection-start-column="34" selection-end-line="128" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Login/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="80" selection-start-line="7" selection-start-column="80" selection-end-line="7" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/conn/statistiqueadmin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+          <folding>
+            <element signature="e#845#1524#1#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/images/LOGO CBI 2.0.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/images/GSH LOGO 2.0.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/newint/bb90fc2972febf31f5fda02eda5dfe62.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/newint/Edit Bleu.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/newint/Login.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/newint/Cbi Logo White.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/images/bg-01.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="483" column="1" selection-start-line="483" selection-start-column="1" selection-end-line="483" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/assets/vendors/summernote/dist/lang/summernote-zh-CN.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/LoginPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="141" selection-start-line="141" selection-end-line="141" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/assets/vendors/ace-builds/src-min/mode-django.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="20881" selection-start-column="20881" selection-end-column="20881" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bi/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="714" column="89" selection-start-line="714" selection-start-column="89" selection-end-line="714" selection-end-column="89" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/conn/ajoutauth.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2477">
+          <caret line="327" column="17" selection-start-line="327" selection-start-column="5" selection-end-line="327" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bi/form.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bi/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-583">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Login/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Login/migrations/0001_initial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="21" column="93" selection-start-line="21" selection-start-column="93" selection-end-line="21" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/conn/adminpage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="66" column="41" lean-forward="true" selection-start-line="66" selection-start-column="41" selection-end-line="66" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/site/css/organicfoodicons.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="27" column="57" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/newint/Gsh Logo White.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CBINew/static/login/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+          <folding>
+            <element signature="e#225#232#1" expanded="true" />
+            <element signature="e#225#232#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/conn/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="246" column="46" selection-start-line="246" selection-start-column="46" selection-end-line="246" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

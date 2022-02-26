@@ -41,7 +41,7 @@
                             <div class="col-1" style="display: none"><div class="deletediv" onclick="supprimer(this)">X</div></div>
                         </div>
                         <div class="row champbdd">
-                            <div class="col">{{ form.champsbdd }}</div>
+                            <div class="col">{{ form.lien }}</div>
                         </div>
                     </div>
                 {% endfor %}
@@ -184,7 +184,7 @@
                 if (!$( "#champniveaux" ).length ) {
                     $champtype.after('<div class="row champniveaux" id="champniveaux"><select class="form-control" id="selectniveau" onchange="RaffraichirChoixtype(4)">' +
                         '<option value="1">Consolidé</option>' +
-                        '<option value="2">Pole</option><option value="3">Société</option></select></div>')
+                        '<option value="2">Pole</option><option value="3">Région</option></select></div>')
                 }
                 niveau = $("#selectniveau").val();
                 switch (niveau) {
@@ -227,7 +227,7 @@
             case "5":
                 if (!$( "#champniveaux" ).length ) {
                     $champtype.after('<div class="row champniveaux" id="champniveaux"><select class="form-control" id="selectniveau" onchange="RaffraichirChoixtype(5)"><option value="1">Consolidé</option>' +
-                        '<option value="2">Pole</option><option value="3">Société</option></select></div>')
+                        '<option value="2">Pole</option><option value="3">Région</option></select></div>')
                 }
                 niveau = $("#selectniveau").val();
                 switch (niveau) {
@@ -275,7 +275,7 @@
             case "6":
                 if (!$( "#champniveaux" ).length ) {
                     $champtype.after('<div class="row champniveaux" id="champniveaux"><select class="form-control" id="selectniveau" onchange="RaffraichirChoixtype(6)"><option value="1">Consolidé</option>' +
-                        '<option value="2">Pole</option><option value="3">Société</option></select></div>')
+                        '<option value="2">Pole</option><option value="3">Région</option></select></div>')
                 }
                 niveau = $("#selectniveau").val();
                 switch (niveau) {
